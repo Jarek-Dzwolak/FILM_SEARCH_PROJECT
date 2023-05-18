@@ -1,4 +1,4 @@
-import './sass/main.scss';
+// import './sass/main.scss';
 
 fetch(
   'https://api.themoviedb.org/3/trending/all/day?api_key=f2bec2f8de04498ca2fd18780a529a31&page=2',
