@@ -9,12 +9,14 @@ fetch(
     response.results.forEach(movie => {
       const movieDiv = document.createElement('div');
       movieDiv.innerHTML = `
+
        
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
         movie.title || movie.name
       } Poster">
        <h2>${movie.title || movie.name}</h2>
         <p>${movie.overview}</p>
+
       `;
       resultDiv.appendChild(movieDiv);
     });
