@@ -3,10 +3,12 @@
 fetch(
   'https://api.themoviedb.org/3/trending/all/day?api_key=f2bec2f8de04498ca2fd18780a529a31&page=2',
 )
-  .then(response => response.json())
   .then(response => {
+    const data = response.json();
+  })
+  .then(data => {
     const resultDiv = document.getElementById('favorites-list');
-    response.results.forEach(movie => {
+    data.results.forEach(movie => {
       const movieDiv = document.createElement('div');
       movieDiv.innerHTML = `
 
