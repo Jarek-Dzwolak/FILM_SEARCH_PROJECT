@@ -1,6 +1,6 @@
 // import './sass/main.scss';
 
-const resultDiv = document.querySelector('.favorites-movies');
+const resultDiv = document.querySelector('.movie-container__favorites');
 
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
@@ -10,12 +10,17 @@ function FavoritesMovies() {
     .then(response => {
       response.results.forEach(movie => {
         const movieDiv = document.createElement('div');
+        movieDiv.classList.add('movie-container__card');
         movieDiv.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
           movie.title || movie.name
-        } Poster">
-          <h2>${movie.title || movie.name}</h2>
-          <p>${movie.overview}</p>
+        } Poster" class="movie-container__img">
+          <p class="movie-container__movie-description">
+          <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+          <span class="movie-container__genre">${movie.title || movie.name} || </span>
+          <span class="movie-container__screening">${movie.overview}</span>
+          </p>
+
         `;
         resultDiv.appendChild(movieDiv);
       });

@@ -1,8 +1,83 @@
 .movie-container {
-  display: flex;
-  flex-direction: row;
-}
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 40px;
 
-.favorite-movies {
-  display: flex;
+  @include tablet {
+    max-width: 768px;
+    padding: 60px 32px;
+  }
+
+  @include desktop {
+    max-width: 1280px;
+    padding-bottom: 44px;
+  }
+
+  &__favorites {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    @include tablet {
+      gap: 32px;
+    }
+
+    @include desktop {
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__card {
+    max-width: 280px;
+
+    @include tablet {
+      max-width: 336px;
+    }
+
+    @include desktop {
+      max-width: 395px;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+  }
+
+  &__movie-description {
+    overflow: hidden;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+
+    @include tablet {
+      font-size: 12px;
+    }
+
+    @include desktop {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  &__title {
+    line-height: 14px;
+    text-transform: uppercase;
+
+    @include tablet {
+      line-height: 16px;
+    }
+  }
+
+  &__genre {
+    color: #ff6b08;
+  }
+
+  &__screening {
+    color: #ff6b08;
+  }
 }
