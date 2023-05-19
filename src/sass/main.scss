@@ -4,9 +4,16 @@
  */
 
 // Style dla pliku z przykładem HTML fragmentu
+@use './utils/vars' as *;
+@import './utils/mixins';
+@import './partials/body';
+@import './partials/button';
+@import './partials/typography';
+@import './partials/header';
 
 @use './utils/variables' as *;
 @import './utils/mixins';
 @import './utils/global';
-@import './example';
+@import './partials/movie-container';
+@import './partials/footer';
 @import './partials/footer';
