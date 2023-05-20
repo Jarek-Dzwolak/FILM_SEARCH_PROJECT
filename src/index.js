@@ -8,17 +8,19 @@ function FavoritesMovies() {
   fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=2`)
     .then(response => response.json())
     .then(response => {
+      console.log(response);
       response.results.forEach(movie => {
         const movieDiv = document.createElement('div');
         movieDiv.classList.add('movie-container__card');
+        // genres = [genre['name'] for genre in data['genres']];
         movieDiv.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
           movie.title || movie.name
         } Poster" class="movie-container__img">
           <p class="movie-container__movie-description">
           <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-          <span class="movie-container__genre">${movie.title || movie.name} || </span>
-          <span class="movie-container__screening">${movie.overview}</span>
+          <span class="movie-container__genre">${movie.genres_ids} || </span>
+          <span class="movie-container__screening">${movie.release_date}</span>
           </p>
 
         `;
