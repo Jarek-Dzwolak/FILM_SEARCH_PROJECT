@@ -34,7 +34,8 @@ FavoritesMovies();
 
 const searchInput = document.getElementById('Movie-search');
 
-function searchMovies() {
+function searchMovies(event) {
+  event.preventDefault();
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
   const searchQuery = searchInput.value;
   const page = 1; // Numer strony, którą chcesz pobrać
