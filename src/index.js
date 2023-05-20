@@ -16,11 +16,14 @@ function FavoritesMovies() {
         movieDiv.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
           movie.title || movie.name
-        } Poster" class="movie-container__img">
+        } Poster" class="movie-container__image">
           <p class="movie-container__movie-description">
           <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-          <span class="movie-container__genre">${movie.genres_ids} || </span>
+          <span class="movie-container__genre">${movie.genres_ids} | </span>
           <span class="movie-container__screening">${movie.release_date}</span>
+          <span class="movie-container__rating"> |  ${movie.vote_average}</span>
+          
+
           </p>
 
         `;

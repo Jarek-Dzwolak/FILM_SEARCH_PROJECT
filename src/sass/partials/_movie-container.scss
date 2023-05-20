@@ -17,6 +17,8 @@
   &__favorites {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 20px;
 
     @include tablet {
@@ -30,19 +32,21 @@
   }
 
   &__card {
-    max-width: 280px;
+    width: 280px;
+    margin: 0;
 
     @include tablet {
-      max-width: 336px;
+      width: 336px;
     }
 
     @include desktop {
-      max-width: 395px;
+      width: 395px;
     }
   }
 
   &__image {
     object-fit: cover;
+    margin-bottom: 10px;
   }
 
   &__movie-description {
@@ -51,7 +55,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 1.16;
     color: #000000;
 
     @include tablet {
@@ -60,16 +64,16 @@
 
     @include desktop {
       font-size: 20px;
-      line-height: 24px;
+      line-height: 1.2;
     }
   }
 
   &__title {
-    line-height: 14px;
+    // line-height: 14px;
     text-transform: uppercase;
 
     @include tablet {
-      line-height: 16px;
+      // line-height: 16px;
     }
   }
 
@@ -79,5 +83,9 @@
 
   &__screening {
     color: #ff6b08;
+  }
+
+  &__rating {
+    display: none;
   }
 }
