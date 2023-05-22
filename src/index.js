@@ -74,7 +74,7 @@ function searchMovies(event) {
             movieDiv.classList.add('movie-container__card');
             const moviePoster = movie.poster_path
               ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-              : '';
+              : 'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
 
             // Pobierz nazwy gatunków na podstawie identyfikatorów
             const genres = movie.genre_ids.map(genreId => {
