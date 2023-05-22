@@ -9,30 +9,42 @@ function FavoritesMovies() {
     .then(response => response.json())
     .then(response => {
       console.log(response);
-      response.results.forEach(movie => {
-        const movieDiv = document.createElement('div');
-        movieDiv.classList.add('movie-container__card');
-        // genres = [genre['name'] for genre in data['genres']];
-        movieDiv.innerHTML = `
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
-          movie.title || movie.name
-        } Poster" class="movie-container__image">
-          <p class="movie-container__movie-description">
-          <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-          <span class="movie-container__genre">${movie.genres_ids} | </span>
-          <span class="movie-container__screening">${movie.release_date}</span>
-          <span class="movie-container__rating"> |  ${movie.vote_average}</span>
-          
 
-          </p>
+      // Pobierz listę gatunków filmowych
+      fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
+        .then(genresResponse => genresResponse.json())
+        .then(genresResponse => {
+          console.log(genresResponse);
 
-        `;
-        resultDiv.appendChild(movieDiv);
-      });
+          response.results.forEach(movie => {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie-container__card');
+
+            // Pobierz nazwy gatunków na podstawie identyfikatorów
+            const genres = movie.genre_ids.map(genreId => {
+              const genre = genresResponse.genres.find(g => g.id === genreId);
+              return genre ? genre.name : '';
+            });
+
+            movieDiv.innerHTML = `
+              <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+              movie.title || movie.name
+            } Poster" class="movie-container__image">
+              <p class="movie-container__movie-description">
+              <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+              <span class="movie-container__genre">${genres.join(', ')} | </span>
+              <span class="movie-container__screening">${movie.release_date}</span>
+              <span class="movie-container__rating"> |  ${movie.vote_average}</span>
+              </p>
+            `;
+
+            resultDiv.appendChild(movieDiv);
+          });
+        })
+        .catch(err => console.error(err));
     })
     .catch(err => console.error(err));
 }
-
 FavoritesMovies();
 
 const searchInput = document.getElementById('Movie-search');
@@ -50,21 +62,41 @@ function searchMovies(event) {
   )
     .then(response => response.json())
     .then(response => {
-      const searchMovieDiv = document.querySelector('.search-movies');
+      const searchMovieDiv = document.querySelector('.movie-container__search-movies');
       searchMovieDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniego wyszukiwania
 
-      response.results.forEach(movie => {
-        const movieDiv = document.createElement('div');
-        const moviePoster = movie.poster_path
-          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-          : '';
-        movieDiv.innerHTML = `
-          ${moviePoster && `<img src="${moviePoster}" alt="${movie.title} Poster">`}
-          <h2>${movie.title}</h2>
-          <p>${movie.overview}</p>
-        `;
-        searchMovieDiv.appendChild(movieDiv);
-      });
+      // Pobierz listę gatunków filmowych
+      fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
+        .then(genresResponse => genresResponse.json())
+        .then(genresResponse => {
+          response.results.forEach(movie => {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie-container__card');
+            const moviePoster = movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : '';
+
+            // Pobierz nazwy gatunków na podstawie identyfikatorów
+            const genres = movie.genre_ids.map(genreId => {
+              const genre = genresResponse.genres.find(g => g.id === genreId);
+              return genre ? genre.name : '';
+            });
+
+            movieDiv.innerHTML = `
+              <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+              movie.title || movie.name
+            } Poster" class="movie-container__image">
+              <p class="movie-container__movie-description">
+              <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+              <span class="movie-container__genre">${genres.join(', ')} | </span>
+              <span class="movie-container__screening">${movie.release_date}</span>
+              <span class="movie-container__rating"> |  ${movie.vote_average}</span>
+              </p>
+            `;
+            searchMovieDiv.appendChild(movieDiv);
+          });
+        })
+        .catch(err => console.error(err));
     })
     .catch(err => console.error(err));
 }
