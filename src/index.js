@@ -27,27 +27,33 @@ FavoritesMovies();
 
 const searchInput = document.getElementById('Movie-search');
 
-function searchMovies() {
+function searchMovies(event) {
+  event.preventDefault();
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
   const searchQuery = searchInput.value;
   const page = 1; // Numer strony, którą chcesz pobrać
+
+  resultDiv.style.display = 'none';
 
   fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${page}`,
   )
     .then(response => response.json())
     .then(response => {
-      const searchMovieDiv = document.querySelector('search-movies');
+      const searchMovieDiv = document.querySelector('.search-movies');
+      searchMovieDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniego wyszukiwania
 
-      resultDiv.style.display = 'none';
       response.results.forEach(movie => {
-        const movieDiv2 = document.createElement('div');
-        movieDiv2.innerHTML = `
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} Poster">
+        const movieDiv = document.createElement('div');
+        const moviePoster = movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : '';
+        movieDiv.innerHTML = `
+          ${moviePoster && `<img src="${moviePoster}" alt="${movie.title} Poster">`}
           <h2>${movie.title}</h2>
           <p>${movie.overview}</p>
         `;
-        searchMovieDiv.appendChild(movieDiv2);
+        searchMovieDiv.appendChild(movieDiv);
       });
     })
     .catch(err => console.error(err));
