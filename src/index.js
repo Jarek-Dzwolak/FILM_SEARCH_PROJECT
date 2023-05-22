@@ -5,7 +5,7 @@ const resultDiv = document.querySelector('.movie-container__favorites');
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=2`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=1`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
