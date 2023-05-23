@@ -52,6 +52,7 @@ function createModal(movie) {
 </div>
        `;
 
+
   main.appendChild(backDrop);
 
   const closeModal = document.getElementById('close-modal-btn');
