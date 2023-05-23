@@ -1,66 +1,102 @@
-// Pobranie referencji do elementów modala
-const modalBackdrop = document.getElementById('modal-backdrop');
-const modalImage = document.getElementById('modal-image');
-const modalTitle = document.getElementById('modal-title');
-const modalRanking = document.querySelector('.modal__info__details__ranking');
-const modalPopularity = document.querySelector('.modal__info__details');
-const modalOriginalTitle = document.querySelector('.modal__info__details');
-const modalGenre = document.querySelector('.modal__info__details');
-const modalDescription = document.getElementById('modal-description');
-const watchedBtn = document.getElementById('watched-btn');
-const queueBtn = document.getElementById('queue-btn');
+// Tworzenie modala
+const modalBackdrop = document.createElement('div');
+modalBackdrop.id = 'modal-backdrop';
+modalBackdrop.className = 'modal-backdrop';
 
-// Funkcja wyświetlająca modal
-function showModal() {
-  modalBackdrop.style.display = 'block';
+const container = document.createElement('div');
+container.className = 'container';
+
+const modal = document.createElement('div');
+modal.id = 'modal';
+modal.className = 'modal';
+
+const closeModalBtn = document.createElement('button');
+closeModalBtn.id = 'close-modal-btn';
+closeModalBtn.type = 'button';
+closeModalBtn.className = 'modal__close';
+closeModalBtn.textContent = 'X';
+
+const modalImage = document.createElement('img');
+modalImage.id = 'modal-image';
+modalImage.src = '';
+modalImage.alt = 'tytuł filmu';
+modalImage.className = 'modal-image';
+
+const modalText = document.createElement('div');
+modalText.id = 'modal-text';
+modalText.className = 'modal__text';
+modalText.style.display = 'block';
+
+const modalTitle = document.createElement('h3');
+modalTitle.id = 'modal-title';
+modalTitle.className = 'modal__title';
+
+const modalInfo1 = createModalInfo('Vote / Votes', 'modal__info__category', 'modal__info__details');
+const modalInfo2 = createModalInfo('Popularity', 'modal__info__category', 'modal__info__details');
+const modalInfo3 = createModalInfo(
+  'Original Title',
+  'modal__info__category',
+  'modal__info__details',
+);
+const modalInfo4 = createModalInfo('Genre', 'modal__info__category', 'modal__info__details');
+
+const modalDescription = document.createElement('article');
+modalDescription.className = 'modal__description';
+
+const modalDescriptionHeading = document.createElement('p');
+modalDescriptionHeading.id = 'modal-description__modal';
+modalDescriptionHeading.textContent = 'ABOUT';
+
+const modalDescriptionText = document.createElement('p');
+modalDescriptionText.id = 'modal-decription';
+
+const modalButtons = document.createElement('div');
+modalButtons.className = 'modal-buttons';
+
+const watchedBtn = document.createElement('button');
+watchedBtn.id = 'watched-btn';
+watchedBtn.className = 'button button--modal';
+watchedBtn.textContent = 'ADD TO WATCHED';
+
+const queueBtn = document.createElement('button');
+queueBtn.id = 'queue-btn';
+queueBtn.className = 'button button--modal';
+queueBtn.textContent = 'ADD TO QUEUE';
+
+// Dodawanie elementów do modalu
+modal.appendChild(closeModalBtn);
+modal.appendChild(modalImage);
+
+modalText.appendChild(modalTitle);
+modalText.appendChild(modalInfo1);
+modalText.appendChild(modalInfo2);
+modalText.appendChild(modalInfo3);
+modalText.appendChild(modalInfo4);
+modalText.appendChild(modalDescription);
+
+modalDescription.appendChild(modalDescriptionHeading);
+modalDescription.appendChild(modalDescriptionText);
+
+modalButtons.appendChild(watchedBtn);
+modalButtons.appendChild(queueBtn);
+
+modalText.appendChild(modalButtons);
+
+container.appendChild(modal);
+modalBackdrop.appendChild(container);
+
+// Dodawanie modalu do dokumentu
+document.body.appendChild(modalBackdrop);
+
+// Funkcja pomocnicza do tworzenia elementów dla informacji w modalu
+function createModalInfo(category, categoryClass, detailsClass) {
+  const modalInfo = document.createElement('div');
+  modalInfo.className = 'modal__info';
+
+  const categoryElement = document.createElement('p');
+  categoryElement.className = categoryClass;
+  categoryElement.textContent = category;
+
+  const detailsElement = document.createElement('p');
+  detailsElement.className = detailsClass;
 }
-
-// Funkcja zamykająca modal
-function closeModal() {
-  modalBackdrop.style.display = 'none';
-}
-
-// Funkcja pobierająca informacje o filmie z API i aktualizująca zawartość modala
-async function fetchMovieDetails(movieId) {
-  try {
-    // Wykonaj zapytanie do API, używając movieId
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=f2bec2f8de04498ca2fd18780a529a31`,
-    );
-    const data = await response.json();
-
-    // Aktualizuj zawartość modala na podstawie danych z API
-    modalImage.src = data.poster_path;
-    modalTitle.textContent = data.title;
-    modalRanking.textContent = `${data.vote_average} / ${data.vote_count}`;
-    modalPopularity.textContent = data.popularity;
-    modalOriginalTitle.textContent = data.original_title;
-    modalGenre.textContent = data.genre;
-    modalDescription.textContent = data.overview;
-
-    // Przypisz funkcję do przycisków w modalu
-    watchedBtn.addEventListener('click', addToWatched);
-    queueBtn.addEventListener('click', addToQueue);
-
-    // Wyświetl modal
-    showModal();
-  } catch (error) {
-    console.error('Wystąpił błąd podczas pobierania danych z API:', error);
-  }
-}
-
-// // Funkcja obsługująca kliknięcie w przycisk "ADD TO WATCHED"
-// function addToWatched() {
-//   // Dodaj kod obsługujący dodanie filmu do listy obejrzanych
-// }
-
-// // Funkcja obsługująca kliknięcie w przycisk "ADD TO QUEUE"
-// function addToQueue() {
-//   // Dodaj kod obsługujący dodanie filmu do kolejki
-// }
-
-// Funkcja obsługująca kliknięcie w przycisk zamykający modal
-document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-
-// // Przykładowe użycie - wywołaj funkcję fetchMovieDetails z odpowiednim id filmu
-// fetchMovieDetails(12345);
