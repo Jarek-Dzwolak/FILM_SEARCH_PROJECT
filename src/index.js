@@ -29,7 +29,10 @@ function FavoritesMovies() {
             });
 
             const fullDate = movie.release_date;
+
             const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+
+
 
             movieDiv.innerHTML = `
               <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
@@ -82,8 +85,10 @@ function searchMovies(event) {
               const genre = genresResponse.genres.find(g => g.id === genreId);
               return genre ? genre.name : '';
             });
+
             const fullDate = movie.release_date;
             const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+
             fallbackImageURL =
               'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
             movieDiv.innerHTML = `
