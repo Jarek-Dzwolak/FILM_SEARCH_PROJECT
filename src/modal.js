@@ -1,17 +1,13 @@
-export { createModal };
+export { createModal, closeModal };
 
 function createModal(movie) {
   const main = document.querySelector('.movie-container');
   const backDrop = document.createElement('div');
   backDrop.classList.add('backdrop');
 
-  // const genres = movie.genre_ids.map(genreId => {
-  //   const genre = genresResponse.genres.find(g => g.id === genreId);
-  //   return genre ? genre.name : '';
-  // });
-
   const fullDate = movie.release_date;
   const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+
 
   backDrop.innerHTML = ` 
   <div id="modal" class="modal">
@@ -55,5 +51,11 @@ function createModal(movie) {
   </div>
 </div>
        `;
+
   main.appendChild(backDrop);
+
+  const closeModal = document.getElementById('close-modal-btn');
+  closeModal.addEventListener('click', function () {
+    main.removeChild(backDrop);
+  });
 }
