@@ -1,0 +1,35 @@
+.button {
+  border-radius: 5px;
+  border: 1px solid white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 14px 9.19px 12px;
+  width: 125px;
+  &:hover,
+  &:focus {
+    background-color: $orange;
+    border: none;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  }
+  &--modal {
+    border: 1px solid black;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+// @mixin tablet {
+//     @media screen and (min-width: #{$tablet}) {
+//       .button;
+//     }
+//   }
+//   @mixin desktop {
+//     @media screen and (min-width: #{$desktop}) {
+//       .button;
+//     }
+//   }

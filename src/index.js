@@ -1,11 +1,11 @@
 // import './sass/main.scss';
-
+import { createModal } from './modal';
 const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=${currentPage}`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=2`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -19,7 +19,9 @@ function FavoritesMovies() {
           response.results.forEach(movie => {
             const movieDiv = document.createElement('div');
             movieDiv.classList.add('movie-container__card');
-
+            movieDiv.addEventListener('click', function () {
+              createModal(movie); // Przekazanie danych filmu jako argument do createModal
+            });
             // Pobierz nazwy gatunków na podstawie identyfikatorów
             const genres = movie.genre_ids.map(genreId => {
               const genre = genresResponse.genres.find(g => g.id === genreId);
@@ -27,6 +29,7 @@ function FavoritesMovies() {
             });
 
             const fullDate = movie.release_date;
+            //pobieramy date w formacie rrrr-mm-dd  potrzebujemy skrócić do formatu rrrr
             const year = fullDate.slice(0, 4);
 
             movieDiv.innerHTML = `
@@ -82,6 +85,7 @@ function searchMovies(event) {
             });
 
             const fullDate = movie.release_date;
+            //pobieramy date w formacie rrrr-mm-dd  potrzebujemy skrócić do formatu rrrr
             const year = fullDate.slice(0, 4);
 
             fallbackImageURL =
