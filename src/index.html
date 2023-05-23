@@ -4,39 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Website</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./sass/main.scss" />
   </head>
   <body>
+    <include src="./partials/header.html"></include>
+
     <!-- FT-01: Header strony głównej -->
     <!-- Logo i przycisk "Home" -->
     <!-- Przycisk "My Library" -->
-    <header class="header-wrapper">
-      <div class="header-container">
-        <div class="header-icon">
-          <svg width="24px" height="24px">
-            <use href="./images/icons.svg#film"></use>
-          </svg>
-        </div>
-        <ul class="button-list">
-          <li><button type="button">HOME</button></li>
-          <li><button type="button">MY LIBRARY</button></li>
-        </ul>
-      </div>
-      <form class="Movie-search" id="Movie-search">
-        <input
-          id="Movie-search"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Movie-search"
-        />
-      </form>
-    </header>
+
     <main>
-      <div class="movie-container">
-        <!-- FT-06: Kontener strony głównej dla kart filmów -->
-        <!-- Tutaj będą wyświetlane karty filmów -->
-      </div>
+      <include src="./partials/movie-container.html"></include>
+
       <!-- FT-08: Numeracja stron (pagination) -->
     </main>
     <footer>
@@ -44,7 +23,8 @@
       <!-- Przycisk "GoIT Students" dla okna modalnego z informacjami o zespole -->
     </footer>
     <!-- FT-16: Szablon okna modalnego jednego filmu -->
+    <!-- <include src="./partials/modal.html"></include> -->
     <!-- FT-21: Loader (spinner) -->
-    <script src="app.js"></script>
+    <script src="./index.js" type="module"></script>
   </body>
 </html>
