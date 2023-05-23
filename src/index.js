@@ -106,119 +106,122 @@ function searchMovies(event) {
 // Wywołanie funkcji searchMovies() po kliknięciu przycisku "Szukaj"
 document.getElementById('search-button').addEventListener('click', searchMovies);
 
-const paginationContainer = document.querySelector('.pagination');
-const itemsPerPage = 20;
-let items = [];
+// const paginationContainer = document.querySelector(".pagination");
+// const itemsPerPage = 20;
+// let items = [];
 
-fetch(
-  `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${page}`,
-)
-  .then(response => response.json())
-  .then(data => {
-    items = data.items;
+// fetch(?)
+//   .then(response => response.json())
+//   .then(data => {
+//     items = data.items;
 
-    if (items.length === 0) {
-      console.error('Brak elementów do paginacji.');
-    }
+//     if (items.length === 0) {
+//       console.error("Brak elementów do paginacji.");
+//     }
 
-    const numPages = Math.ceil(items.length / itemsPerPage);
+// dzielenie card na strony
+// const numPages = Math.ceil(items.length / itemsPerPage);
+// przycisk wsteczny
+//     const prevButton = document.createElement("li");
+//     prevButton.className = "pagination__item pagination__item-button";
+//     prevButton.innerHTML = `
+//       <svg class="pagination__icon-arrow pagination__icon-arrow--left" width="16" height="16">
+//         <use href="images/arrows.svg#icon-arrow-left2"></use>
+//       </svg>
+//     `;
+//     paginationContainer.appendChild(prevButton);
+// przycisk przód
+//     const nextButton = document.createElement("li");
+//     nextButton.className = "pagination__item pagination__item-button";
+//     nextButton.innerHTML = `
+//       <svg class="pagination__icon-arrow pagination__icon-arrow--right" width="16" height="16">
+//         <use href="images/arrows.svg#icon-arrow-right2"></use>
+//       </svg>
+//     `;
+//     paginationContainer.appendChild(nextButton);
 
-    const prevButton = document.createElement('li');
-    prevButton.className = 'pagination__item pagination__item-button';
-    prevButton.innerHTML = `
-      <svg class="pagination__icon-arrow pagination__icon-arrow--left" width="16" height="16">
-        <use href="images/arrows.svg#icon-arrow-left2"></use>
-      </svg>
-    `;
-    paginationContainer.appendChild(prevButton);
+// ilość stron, przypisanie miejsca odpowiedniej strony
+//     for (let i = 1; i <= numPages; i++) {
+//       const pageButton = document.createElement("li");
+//       pageButton.className = "pagination__item";
+//       pageButton.innerHTML = `<span>${i}</span>`;
+//       paginationContainer.insertBefore(
+//         pageButton,
+//         paginationContainer.lastElementChild
+//       );
+//     }
 
-    for (let i = 1; i <= numPages; i++) {
-      const pageButton = document.createElement('li');
-      pageButton.className = 'pagination__item';
-      pageButton.innerHTML = `<span>${i}</span>`;
-      paginationContainer.insertBefore(pageButton, paginationContainer.lastElementChild);
-    }
+// wywoływanie odpowiednich stron dla 1 strony
+//     function goToPage(page) {
+//       const startIndex = (page - 1) * itemsPerPage;
+//       const endIndex = startIndex + itemsPerPage;
 
-    const nextButton = document.createElement('li');
-    nextButton.className = 'pagination__item pagination__item-button';
-    nextButton.innerHTML = `
-      <svg class="pagination__icon-arrow pagination__icon-arrow--right" width="16" height="16">
-        <use href="images/arrows.svg#icon-arrow-right2"></use>
-      </svg>
-    `;
-    paginationContainer.appendChild(nextButton);
+// to samo dla przycisków, zeby znikały, gdy liczba kard nie jest większa od limitu na jednej stronie
+//       items.forEach((item, index) => {
+//         if (index >= startIndex && index < endIndex) {
+//           item.style.display = "block";
+//         } else {
+//           item.style.display = "none";
+//         }
+//       });
+//     }
 
-    function goToPage(page) {
-      const startIndex = (page - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
+//     goToPage(1);
 
-      items.forEach((item, index) => {
-        if (index >= startIndex && index < endIndex) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
+// klikniecie na odpowiednia strone - przekierowanie
+//     const pageButtons = Array.from(document.querySelectorAll(".pagination__item:not(.pagination__item-button)"));
+//     if (pageButtons.length > 0) {
+//       pageButtons.forEach((button, index) => {
+//         button.addEventListener("click", () => {
+//           const currentPage = index + 1;
+//           goToPage(currentPage);
+//         });
+//       });
+//     }
+// klik na przycisk - poprzedni
+//     if (prevButton) {
+//       prevButton.addEventListener("click", () => {
+//         const activePage = document.querySelector(".pagination__item.active");
+//         if (!activePage) {
+//           console.error(error);
+//           return;
+//         }
+//         const currentPage = parseInt(activePage.textContent);
 
-    goToPage(1);
+//         if (currentPage > 1) {
+//           const prevPage = activePage.previousElementSibling;
+//           if (!prevPage) {
+//             console.error("error");
+//             return;
+//           }
+//           activePage.classList.remove("active");
+//           prevPage.classList.add("active");
+//           goToPage(currentPage - 1);
+//         }
+//       });
+//     }
+// klik na przycisk - next
+//     if (nextButton) {
+//       nextButton.addEventListener("click", () => {
+//         const activePage = document.querySelector(".pagination__item.active");
+//         if (!activePage) {
+//           console.error("error");
+//           return;
+//         }
+//         const currentPage = parseInt(activePage.textContent);
 
-    const pageButtons = Array.from(
-      document.querySelectorAll('.pagination__item:not(.pagination__item-button)'),
-    );
-    if (pageButtons.length > 0) {
-      pageButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-          const currentPage = index + 1;
-          goToPage(currentPage);
-        });
-      });
-    }
-
-    if (prevButton) {
-      prevButton.addEventListener('click', () => {
-        const activePage = document.querySelector('.pagination__item.active');
-        if (!activePage) {
-          console.error('Brak aktywnej strony.');
-          return;
-        }
-        const currentPage = parseInt(activePage.textContent);
-
-        if (currentPage > 1) {
-          const prevPage = activePage.previousElementSibling;
-          if (!prevPage) {
-            console.error('Brak poprzedniej strony.');
-            return;
-          }
-          activePage.classList.remove('active');
-          prevPage.classList.add('active');
-          goToPage(currentPage - 1);
-        }
-      });
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener('click', () => {
-        const activePage = document.querySelector('.pagination__item.active');
-        if (!activePage) {
-          console.error('Brak aktywnej strony.');
-          return;
-        }
-        const currentPage = parseInt(activePage.textContent);
-
-        if (currentPage < numPages) {
-          const nextPage = activePage.nextElementSibling;
-          if (!nextPage) {
-            console.error('Brak następnej strony.');
-            return;
-          }
-          activePage.classList.remove('active');
-          nextPage.classList.add('active');
-          goToPage(currentPage + 1);
-        }
-      });
-    }
-  })
-  .catch(error => {
-    console.error('Błąd podczas pobierania danych z API:', error);
-  });
+//         if (currentPage < numPages) {
+//           const nextPage = activePage.nextElementSibling;
+//           if (!nextPage) {
+//             console.error("error");
+//           return;
+//         }
+//         activePage.classList.remove("active");
+//         nextPage.classList.add("active");
+//         goToPage(currentPage + 1);
+//       }
+//     });
+//   })
+//   .catch(error => {
+//     console.error("error");
+//   });
