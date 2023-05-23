@@ -5,11 +5,6 @@ function createModal(movie) {
   const backDrop = document.createElement('div');
   backDrop.classList.add('backdrop');
 
-  // const genres = movie.genre_ids.map(genreId => {
-  //   const genre = genresResponse.genres.find(g => g.id === genreId);
-  //   return genre ? genre.name : '';
-  // });
-
   const fullDate = movie.release_date;
   const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
