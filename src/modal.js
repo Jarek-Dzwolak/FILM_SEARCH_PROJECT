@@ -1,4 +1,4 @@
-export { createModal };
+export { createModal, closeModal };
 
 function createModal(movie) {
   const main = document.querySelector('.movie-container');
@@ -9,6 +9,7 @@ function createModal(movie) {
   const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
   backDrop.innerHTML = `
+
   <div id="modal" class="modal">
     <button id="close-modal-btn" type="close-button" class="modal__close">X</button>
     <img
@@ -57,4 +58,5 @@ function createModal(movie) {
   closeModal.addEventListener('click', function () {
     main.removeChild(backDrop);
   });
+
 }
