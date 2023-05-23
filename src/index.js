@@ -82,7 +82,6 @@ function searchMovies(event) {
             });
 
             const fullDate = movie.release_date;
-            //pobieramy date w formacie rrrr-mm-dd  potrzebujemy skrócić do formatu rrrr
             const year = fullDate.slice(0, 4);
 
             fallbackImageURL =
