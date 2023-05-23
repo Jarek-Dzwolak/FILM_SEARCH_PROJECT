@@ -6,6 +6,7 @@
     <title>Movie Website</title>
     <link rel="stylesheet" href="./sass/main.scss" />
   </head>
+
   <body>
     <include src="./partials/header.html"></include>
 
@@ -14,11 +15,18 @@
     <!-- Przycisk "My Library" -->
 
     <main>
+
+
       <include src="./partials/movie-container.html"></include>
+
+      <include src="./partials/pagination.html"></include>
 
       <!-- FT-08: Numeracja stron (pagination) -->
     </main>
+
     <footer>
+       <include src="./partials/footer.html"></include>
+       
       <!-- FT-04: Footer (taki sam dla dwóch stron) -->
       <!-- Przycisk "GoIT Students" dla okna modalnego z informacjami o zespole -->
     </footer>
@@ -26,5 +34,6 @@
     <!-- <include src="./partials/modal.html"></include> -->
     <!-- FT-21: Loader (spinner) -->
     <script src="./index.js" type="module"></script>
+    <script src="/src/js/modal-team.js"></script>
   </body>
 </html>

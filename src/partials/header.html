@@ -2,13 +2,19 @@
   <div class="header-container">
     <div class="header-icon">
       <svg width="24px" height="24px">
-        <use href="./images/film.svg"></use>
+        <use href="/src/images/project-icons.svg#icon-logo"></use>
       </svg>
     </div>
-    <ul class="button-list">
-      <li><button type="button">HOME</button></li>
-      <li><button type="button">MY LIBRARY</button></li>
-    </ul>
+    <nav class="header__navigate">
+      <ul class="header__navigate-list">
+        <li class="header__navigate-item active">
+          <a href="/src/index.html" class="underline-always">HOME</a>
+        </li>
+        <li class="header__navigate-item">
+          <a href="/src/library.html" class="underline-on-hover">MY LIBRARY</a>
+        </li>
+      </ul>
+    </nav>
   </div>
   <form class="form" id="form">
     <input
@@ -18,6 +24,5 @@
       autocomplete="off"
       placeholder="Movie-search"
     />
-    <button id="search-button">Search</button>
   </form>
 </header>
