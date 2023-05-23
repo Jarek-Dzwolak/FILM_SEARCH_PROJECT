@@ -50,12 +50,10 @@ function createModal(movie) {
       </div>
     </div>`;
 
-`;
   main.appendChild(backDrop);
 
   const closeModal = document.getElementById('close-modal-btn');
   closeModal.addEventListener('click', function () {
     main.removeChild(backDrop);
   });
-
 }
