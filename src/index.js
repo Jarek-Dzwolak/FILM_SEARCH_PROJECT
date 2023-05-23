@@ -1,11 +1,11 @@
 // import './sass/main.scss';
-
+import { createModal } from './modal';
 const resultDiv = document.querySelector('.movie-container__favorites');
 
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=2`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=1`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -19,7 +19,9 @@ function FavoritesMovies() {
           response.results.forEach(movie => {
             const movieDiv = document.createElement('div');
             movieDiv.classList.add('movie-container__card');
-
+            movieDiv.addEventListener('click', function () {
+              createModal(movie); // Przekazanie danych filmu jako argument do createModal
+            });
             // Pobierz nazwy gatunków na podstawie identyfikatorów
             const genres = movie.genre_ids.map(genreId => {
               const genre = genresResponse.genres.find(g => g.id === genreId);
@@ -27,7 +29,7 @@ function FavoritesMovies() {
             });
 
             const fullDate = movie.release_date;
-            const year = fullDate.slice(0, 4);
+            const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
             movieDiv.innerHTML = `
               <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
@@ -80,6 +82,8 @@ function searchMovies(event) {
               const genre = genresResponse.genres.find(g => g.id === genreId);
               return genre ? genre.name : '';
             });
+            const fullDate = movie.release_date;
+            const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
             fallbackImageURL =
               'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
             movieDiv.innerHTML = `
@@ -91,7 +95,7 @@ function searchMovies(event) {
               <p class="movie-container__movie-description">
               <h2 class="movie-container__title">${movie.title || movie.name}</h2>
               <span class="movie-container__genre">${genres.join(', ')} | </span>
-              <span class="movie-container__screening">${movie.release_date}</span>
+              <span class="movie-container__screening">${year}</span>
               <span class="movie-container__rating"> |  ${movie.vote_average}</span>
               </p>
             `;

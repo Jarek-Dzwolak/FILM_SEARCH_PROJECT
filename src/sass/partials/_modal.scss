@@ -11,7 +11,14 @@
   bottom: -100%;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.container {
+  margin: 0 auto;
+}
+
 .modal {
   display: flex;
   flex-direction: column;

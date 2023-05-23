@@ -1,102 +1,57 @@
-// Tworzenie modala
-const modalBackdrop = document.createElement('div');
-modalBackdrop.id = 'modal-backdrop';
-modalBackdrop.className = 'modal-backdrop';
+export { createModal };
 
-const container = document.createElement('div');
-container.className = 'container';
+function createModal(movie) {
+  const main = document.querySelector('.movie-container');
+  const backDrop = document.createElement('div');
+  backDrop.classList.add('backdrop');
 
-const modal = document.createElement('div');
-modal.id = 'modal';
-modal.className = 'modal';
+  // const genres = movie.genre_ids.map(genreId => {
+  //   const genre = genresResponse.genres.find(g => g.id === genreId);
+  //   return genre ? genre.name : '';
+  // });
 
-const closeModalBtn = document.createElement('button');
-closeModalBtn.id = 'close-modal-btn';
-closeModalBtn.type = 'button';
-closeModalBtn.className = 'modal__close';
-closeModalBtn.textContent = 'X';
+  const fullDate = movie.release_date;
+  const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
-const modalImage = document.createElement('img');
-modalImage.id = 'modal-image';
-modalImage.src = '';
-modalImage.alt = 'tytuł filmu';
-modalImage.className = 'modal-image';
-
-const modalText = document.createElement('div');
-modalText.id = 'modal-text';
-modalText.className = 'modal__text';
-modalText.style.display = 'block';
-
-const modalTitle = document.createElement('h3');
-modalTitle.id = 'modal-title';
-modalTitle.className = 'modal__title';
-
-const modalInfo1 = createModalInfo('Vote / Votes', 'modal__info__category', 'modal__info__details');
-const modalInfo2 = createModalInfo('Popularity', 'modal__info__category', 'modal__info__details');
-const modalInfo3 = createModalInfo(
-  'Original Title',
-  'modal__info__category',
-  'modal__info__details',
-);
-const modalInfo4 = createModalInfo('Genre', 'modal__info__category', 'modal__info__details');
-
-const modalDescription = document.createElement('article');
-modalDescription.className = 'modal__description';
-
-const modalDescriptionHeading = document.createElement('p');
-modalDescriptionHeading.id = 'modal-description__modal';
-modalDescriptionHeading.textContent = 'ABOUT';
-
-const modalDescriptionText = document.createElement('p');
-modalDescriptionText.id = 'modal-decription';
-
-const modalButtons = document.createElement('div');
-modalButtons.className = 'modal-buttons';
-
-const watchedBtn = document.createElement('button');
-watchedBtn.id = 'watched-btn';
-watchedBtn.className = 'button button--modal';
-watchedBtn.textContent = 'ADD TO WATCHED';
-
-const queueBtn = document.createElement('button');
-queueBtn.id = 'queue-btn';
-queueBtn.className = 'button button--modal';
-queueBtn.textContent = 'ADD TO QUEUE';
-
-// Dodawanie elementów do modalu
-modal.appendChild(closeModalBtn);
-modal.appendChild(modalImage);
-
-modalText.appendChild(modalTitle);
-modalText.appendChild(modalInfo1);
-modalText.appendChild(modalInfo2);
-modalText.appendChild(modalInfo3);
-modalText.appendChild(modalInfo4);
-modalText.appendChild(modalDescription);
-
-modalDescription.appendChild(modalDescriptionHeading);
-modalDescription.appendChild(modalDescriptionText);
-
-modalButtons.appendChild(watchedBtn);
-modalButtons.appendChild(queueBtn);
-
-modalText.appendChild(modalButtons);
-
-container.appendChild(modal);
-modalBackdrop.appendChild(container);
-
-// Dodawanie modalu do dokumentu
-document.body.appendChild(modalBackdrop);
-
-// Funkcja pomocnicza do tworzenia elementów dla informacji w modalu
-function createModalInfo(category, categoryClass, detailsClass) {
-  const modalInfo = document.createElement('div');
-  modalInfo.className = 'modal__info';
-
-  const categoryElement = document.createElement('p');
-  categoryElement.className = categoryClass;
-  categoryElement.textContent = category;
-
-  const detailsElement = document.createElement('p');
-  detailsElement.className = detailsClass;
+  backDrop.innerHTML = ` <div class="container">
+  <div id="modal" class="modal">
+  <button id="close-modal-btn" type="button" class="modal__close">X</button>
+  <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+    movie.title || movie.name
+  } Poster"  class="modal-image" />
+  <div id="modal-text" class="modal__text" style="display: block">
+  <h3 id="modal-title" class="modal__title"></h3>
+      <div class="modal__info">
+        <p class="modal__info__category">Vote  / Votes</p>
+        <p class="modal__info__details">
+        <span class="modal__info__details__ranking">${movie.vote_average} </span>
+        <span> ${movie.vote_count}</span>
+        </p>
+        </div>
+        <div class="modal__info">
+        <p class="modal__info__category">Popularity</p>
+        <p class="modal__info__details">${movie.popularity}</p>
+        </div>
+        <div clas="modal__info">
+        <p class="modal__info__category">Original Title</p>
+        <p class="modal__info__details">${movie.original_title}</p>
+        </div>
+        <div clas="modal__info">
+        <p class="modal__info__category">Genre</p>
+        <p class="modal__info__details"> ${
+          document.getElementsByClassName('movie-container__genre').innerHTML
+        }</p>
+        </div>
+        <article class="modal__description">
+        <p id="modal-description__modal">ABOUT</p>
+        <p id="modal-decription">${movie.overview}</p>
+        </article>
+        <div class="modal=buttons">
+        <button id="watched-btn" class="button button--modal">ADD TO WATCHED</button>
+        <button id="queue-btn" class="button button--modal">ADD TO QUEUE</button>
+        </div>
+        </div>
+        </div>
+        </div>`;
+  main.appendChild(backDrop);
 }
