@@ -1,11 +1,11 @@
 // import './sass/main.scss';
 
 const resultDiv = document.querySelector('.movie-container__favorites');
-
+let currentPage = 1;
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=1`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=${currentPage}`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -27,7 +27,7 @@ function FavoritesMovies() {
             });
 
             const fullDate = movie.release_date;
-            const year = fullDate.slice(0, 4);
+            const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
             movieDiv.innerHTML = `
               <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
