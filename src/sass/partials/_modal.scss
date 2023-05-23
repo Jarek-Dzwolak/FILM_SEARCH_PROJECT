@@ -15,16 +15,13 @@
   justify-content: center;
   align-items: center;
 }
-.container {
-  margin: 0 auto;
-}
 
 .modal {
   display: flex;
   flex-direction: column;
   padding-top: 40px;
   padding-bottom: 40px;
-  width: 704px;
+  width: 300px;
   align-items: center;
   position: fixed;
   left: 50%;
