@@ -9,7 +9,7 @@ function createModal(movie) {
   const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
   backDrop.innerHTML = `
-    <div class="container">
+    
       <div id="modal" class="modal">
         <button id="close-modal-btn" type="button" class="modal__close">X</button>
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
@@ -48,7 +48,7 @@ function createModal(movie) {
           </div>
         </div>
       </div>
-    </div>`;
+   `;
 
   main.appendChild(backDrop);
 
