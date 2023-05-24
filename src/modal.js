@@ -19,6 +19,7 @@ function createModal(movie) {
 
   backDrop.innerHTML = ` 
   <div id="modal" class="modal">
+
     <button id="close-modal-btn" type="button" class="modal__close">&times;</button>
     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
     movie.title || movie.name
@@ -57,6 +58,7 @@ function createModal(movie) {
       </div>
     </div>
   </div>`;
+
 
   main.appendChild(backDrop);
 
