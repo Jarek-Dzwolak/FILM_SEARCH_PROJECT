@@ -81,4 +81,20 @@ function createModal(movie) {
       localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
     }
   });
+  const queueBtn = document.getElementById('queue-btn');
+  queueBtn.addEventListener('click', function () {
+    // Pobierz istniejący obiekt z lokalnego magazynu
+    const storedData = localStorage.getItem('queuedMovies');
+    let queuedMovies = storedData ? JSON.parse(storedData) : [];
+
+    // Sprawdź, czy film już istnieje w liście
+    const movieExists = queuedMovies.some(m => m.id === modalData.id);
+
+    if (!movieExists) {
+      // Dodaj film do listy
+      queuedMovies.push(modalData);
+      // Zapisz zaktualizowaną listę w lokalnym magazynie
+      localStorage.setItem('queuedMovies', JSON.stringify(queuedMovies));
+    }
+  });
 }
