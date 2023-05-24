@@ -11,7 +11,7 @@ function displayWatchedMovies() {
       const movieDiv = document.createElement('div');
       movieDiv.classList.add('movie-container__card');
       movieDiv.addEventListener('click', function () {
-        createModal(movie); // Przekazanie danych filmu jako argument do createModal
+        createModal(movie, year); // Przekazanie danych filmu jako argument do createModal
       });
 
       const genres = Array.isArray(movie.genre_ids)

@@ -5,9 +5,6 @@ function createModal(movie) {
   const backDrop = document.createElement('div');
   backDrop.classList.add('backdrop');
 
-  const fullDate = movie.release_date;
-  const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
-
   const modalData = {
     id: movie.id,
     title: movie.title || movie.name,
@@ -16,7 +13,7 @@ function createModal(movie) {
     vote_count: movie.vote_count,
     popularity: Math.floor(movie.popularity),
     original_title: movie.original_title,
-    genre: document.getElementsByClassName('movie-container__genre').innerHTML,
+
     overview: movie.overview,
   };
 
