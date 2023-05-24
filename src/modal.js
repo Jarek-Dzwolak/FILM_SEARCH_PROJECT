@@ -31,12 +31,12 @@ function createModal(movie) {
       <p class="modal__info__category">Popularity</p>
       <p class="modal__info__details">${Math.floor(movie.popularity)}</p>
     </div>
-    <div clas="modal__info">
+    <div class="modal__info">
       <p class="modal__info__category">Original Title</p>
       <p class="modal__info__details">
       <span>${movie.original_title}<span></p>
     </div>
-    <div clas="modal__info">
+    <div class="modal__info">
       <p class="modal__info__category">Genre</p>
       <p class="modal__info__details">
         ${document.getElementsByClassName('movie-container__genre').innerHTML}
