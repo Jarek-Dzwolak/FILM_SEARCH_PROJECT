@@ -2,10 +2,11 @@
 import { createModal } from './modal';
 const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
+let totalPages = 0;
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=1`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=${currentPage}`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -44,12 +45,90 @@ function FavoritesMovies() {
 
             resultDiv.appendChild(movieDiv);
           });
-        })
-        .catch(err => console.error(err));
+          totalPages = response.total_pages;
+          createPagination();
+        });
     })
     .catch(err => console.error(err));
 }
 FavoritesMovies();
+
+function createPagination() {
+  const paginationContainer = document.querySelector('.pagination');
+  if (paginationContainer) {
+    paginationContainer.innerHTML = ''; // Wyczyszczenie paginacji przed utworzeniem nowej
+
+    const paginationList = document.createElement('ul');
+    paginationList.classList.add('pagination__list');
+
+    // Dodanie przycisku "Poprzednia strona"
+    const prevButton = document.createElement('li');
+    prevButton.classList.add('pagination__item', 'pagination__item-button');
+    const prevButtonIcon = document.createElement('img');
+    prevButtonIcon.classList.add('pagination__icon-arrow', 'pagination__icon-arrow--left');
+    prevButtonIcon.setAttribute('src', 'images/arrows.svg#icon-arrow-left2');
+    prevButtonIcon.setAttribute('width', '16');
+    prevButtonIcon.setAttribute('height', '16');
+    prevButton.appendChild(prevButtonIcon);
+    paginationList.appendChild(prevButton);
+
+    // Dodanie numerów stron
+    const startPage = Math.max(currentPage - 2, 1);
+    const endPage = Math.min(startPage + 4, totalPages);
+    for (let i = startPage; i <= endPage; i++) {
+      const pageButton = document.createElement('li');
+      pageButton.classList.add('pagination__item');
+      if (i === currentPage) {
+        pageButton.classList.add('active');
+      }
+      const pageSpan = document.createElement('span');
+      pageSpan.textContent = i.toString();
+      pageButton.appendChild(pageSpan);
+      paginationList.appendChild(pageButton);
+    }
+
+    // Dodanie przycisku "Następna strona"
+    const nextButton = document.createElement('li');
+    nextButton.classList.add('pagination__item', 'pagination__item-button');
+    const nextButtonIcon = document.createElement('img');
+    nextButtonIcon.classList.add('pagination__icon-arrow', 'pagination__icon-arrow--right');
+    nextButtonIcon.setAttribute('src', '/images/icon-arrow-right2');
+    nextButtonIcon.setAttribute('width', '16');
+    nextButtonIcon.setAttribute('height', '16');
+    nextButton.appendChild(nextButtonIcon);
+    paginationList.appendChild(nextButton);
+
+    paginationContainer.appendChild(paginationList);
+
+    // Obsługa kliknięcia na numer strony lub przyciski "Poprzednia/Następna strona"
+    paginationList.addEventListener('click', event => {
+      const target = event.target;
+      if (target.tagName === 'SPAN') {
+        const pageIndex = parseInt(target.textContent);
+        if (pageIndex >= 1 && pageIndex <= totalPages) {
+          currentPage = pageIndex;
+          resultDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniej strony
+          FavoritesMovies();
+        }
+      } else if (target === prevButton) {
+        if (currentPage > 1) {
+          currentPage--;
+          resultDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniej strony
+          FavoritesMovies();
+        }
+      } else if (target === nextButton) {
+        if (currentPage < totalPages) {
+          currentPage++;
+          resultDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniej strony
+          FavoritesMovies();
+        }
+      }
+    });
+  }
+}
+
+// Inicjalizacja paginacji
+createPagination();
 
 const searchInput = document.getElementById('Movie-search');
 
@@ -217,18 +296,105 @@ document.getElementById('search-button').addEventListener('click', searchMovies)
 //         }
 //         const currentPage = parseInt(activePage.textContent);
 
-//         if (currentPage < numPages) {
-//           const nextPage = activePage.nextElementSibling;
-//           if (!nextPage) {
-//             console.error("error");
-//           return;
-//         }
-//         activePage.classList.remove("active");
-//         nextPage.classList.add("active");
-//         goToPage(currentPage + 1);
+// //         if (currentPage < numPages) {
+// //           const nextPage = activePage.nextElementSibling;
+// //           if (!nextPage) {
+// //             console.error("error");
+// //           return;
+// //         }
+// //         activePage.classList.remove("active");
+// //         nextPage.classList.add("active");
+// //         goToPage(currentPage + 1);
+// //       }
+// //     });
+// //   })
+// //   .catch(error => {
+// //     console.error("error");
+// //   });
+
+// function generatePagination(items) {
+//   const paginationContainer = document.querySelector('.pagination__list');
+//   const itemsPerPage = 20;
+//   let currentPage = 1;
+
+//   if (items.length === 0) {
+//     console.error('Brak elementów do paginacji.');
+//     return;
+//   }
+
+//   const numPages = Math.ceil(items.length / itemsPerPage);
+//   const prevButton = createPaginationButton(
+//     'pagination__item-button',
+//     'pagination__icon-arrow pagination__icon-arrow--left',
+//     'images/arrows.svg#icon-arrow-left2',
+//   );
+//   const nextButton = createPaginationButton(
+//     'pagination__item-button',
+//     'pagination__icon-arrow pagination__icon-arrow--right',
+//     'images/arrows.svg#icon-arrow-right2',
+//   );
+
+//   paginationContainer.appendChild(prevButton);
+//   paginationContainer.appendChild(nextButton);
+
+//   for (let i = 1; i <= numPages; i++) {
+//     const pageButton = document.createElement('li');
+//     pageButton.className = 'pagination__item';
+//     pageButton.innerHTML = `<span>${i}</span>`;
+//     paginationContainer.insertBefore(pageButton, paginationContainer.lastElementChild);
+//   }
+
+//   function goToPage(page) {
+//     const startIndex = (page - 1) * itemsPerPage;
+//     const endIndex = startIndex + itemsPerPage;
+
+//     response.results.forEach((movie, index) => {
+//       const movieDiv = document.querySelector(`.movie-container__card:nth-child(${index + 1})`);
+//       if (index >= startIndex && index < endIndex) {
+//         movieDiv.style.display = 'block';
+//       } else {
+//         movieDiv.style.display = 'none';
 //       }
 //     });
-//   })
-//   .catch(error => {
-//     console.error("error");
-//   });
+//   }
+
+//   goToPage(currentPage);
+
+//   const pageButtons = Array.from(
+//     document.querySelectorAll('.pagination__item:not(.pagination__item-button)'),
+//   );
+//   if (pageButtons.length > 0) {
+//     pageButtons.forEach((button, index) => {
+//       button.addEventListener('click', () => {
+//         currentPage = index + 1;
+//         goToPage(currentPage);
+//       });
+//     });
+//   }
+
+//   if (prevButton) {
+//     prevButton.addEventListener('click', () => {
+//       if (currentPage > 1) {
+//         currentPage--;
+//         goToPage(currentPage);
+//       }
+//     });
+//   }
+
+//   if (nextButton) {
+//     nextButton.addEventListener('click', () => {
+//       if (currentPage < numPages) {
+//         currentPage++;
+//         goToPage(currentPage);
+//       }
+//     });
+//   }
+// }
+
+// // Funkcja do tworzenia przycisków paginacji
+// function createPaginationButton(className, iconClass, iconHref) {
+//   const button = document.createElement('li');
+//   button.className = `pagination__item ${className}`;
+//   button.innerHTML = `<svg class="${iconClass}" width="16" height="16"><use href="${iconHref}"></use></svg>`;
+//   return button;
+// }
