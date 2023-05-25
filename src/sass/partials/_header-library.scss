@@ -1,0 +1,82 @@
+
+
+.header {
+    background-image: url('../images/320/library-background-mobile.jpg');
+    background-size: cover;
+
+    @include tablet {
+        background-image: url('../images/768/library-background-tablet.jpg');
+    }
+
+    @include desktop {
+        background-image: url('../images/1280/library-background-desktop.jpg');
+    }
+}
+
+.header-wrapper {
+    max-width: 320px;
+    padding: 40px 20px 44px 20px;
+
+    @include tablet {
+        max-width: 768px;
+        padding: 40px 33px 45px 31px;
+    }
+
+    @include desktop {
+        padding: 40px 32px 44px 32px;
+        max-width: 1280px;
+    }
+}
+
+
+
+.header__icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.header__icon-text{
+    display: none;
+    @include tablet{
+        display: inline;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+        @include desktop {
+            display: inline;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+}
+
+
+
+.header__navigate a:hover,
+.header__navigate a:focus {
+    color: #FF001B;
+}
+
+
+.header__library-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.library__button {
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    background-color: Transparent;
+    padding: 10px 30px;
+
+}
+
+.library__button:hover,
+.library__button:focus{
+    background: #FF6B01;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+    border: #FF6B01;
+}
