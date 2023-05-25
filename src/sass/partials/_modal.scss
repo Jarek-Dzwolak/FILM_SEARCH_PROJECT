@@ -19,9 +19,9 @@
 .modal {
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  width: 704px;
+  padding: 48px 20px 40px;
+  max-width: 280px;
+  max-height: 80vh;
   align-items: center;
   position: fixed;
   left: 50%;
@@ -29,63 +29,70 @@
   background-color: white;
   overflow-y: scroll;
 
-  &close {
+  &__close {
     position: absolute;
     top: 8px;
     right: 8px;
     width: 30px;
     height: 30px;
     display: flex;
+    background-color: white;
+    border: none;
     justify-content: center;
     align-items: center;
+    font-size: 24px;
+
+    &:hover {
+      color: $orange;
+    }
   }
 
-  &image {
+  &__image {
     border-radius: 5px;
+    max-width: 240px;
   }
 
-  &text {
-    display: none;
+  &__text {
+    display: block;
   }
 
-  &title {
+  &__title {
     font-size: 20px;
-    font-weight: 500;
     line-height: 1.17;
     margin-block: 20px;
     text-transform: uppercase;
     position: relative;
   }
 
-  &info {
+  &__info {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    font-weight: 500;
     line-height: 1.33;
     margin-bottom: 8px;
-    &category {
+    &__category {
+      width: 50%;
+      text-align: left;
       color: $fontgray;
       flex: 1 1 0px;
     }
-    &details {
-      &ranking {
+    &__details {
+      text-transform: uppercase;
+      &__ranking {
         color: white;
         background-color: $orange;
-        padding-inline: 10px;
-        padding-block: 1px;
+        padding: 1px 10px;
         border-radius: 5px;
       }
       flex: 1 1 0px;
     }
   }
 
-  &description {
+  &__description {
     font-size: 12px;
-    font-weight: 500;
     line-height: 20px;
     margin-block: 20px;
-    &modal {
+    &__modal {
       margin-bottom: 8px;
     }
   }
@@ -94,5 +101,25 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 704px;
+    flex-direction: row;
+    align-items: flex-start;
+
+    &__image {
+      margin-right: 20px;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__title {
+      margin-bottom: 0;
+    }
   }
 }

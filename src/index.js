@@ -3,10 +3,11 @@ import { createModal } from './modal';
 const resultDiv = document.querySelector('.movie-container');
 // const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
+let totalPages = 0;
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
-  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=1`)
+  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&page=${currentPage}`)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -45,13 +46,86 @@ function FavoritesMovies() {
 
             resultDiv.appendChild(movieDiv);
           });
-        })
-        .catch(err => console.error(err));
+          totalPages = response.total_pages;
+          createPagination();
+        });
     })
     .catch(err => console.error(err));
 }
 
 FavoritesMovies();
+
+function createPagination() {
+  const paginationContainer = document.querySelector('.pagination');
+  if (paginationContainer) {
+    paginationContainer.innerHTML = '';
+
+    const paginationList = document.createElement('ul');
+    paginationList.classList.add('pagination__list');
+
+    const prevButton = document.createElement('li');
+    prevButton.classList.add('pagination__item', 'pagination__item-button');
+    const prevButtonIcon = document.createElement('img');
+    prevButtonIcon.classList.add('pagination__icon-arrow', 'pagination__icon-arrow--left');
+    prevButtonIcon.setAttribute('src', './images/arrow-left.svg');
+    prevButtonIcon.setAttribute('width', '16');
+    prevButtonIcon.setAttribute('height', '16');
+    prevButton.appendChild(prevButtonIcon);
+    paginationList.appendChild(prevButton);
+
+    const startPage = Math.max(currentPage - 2, 1);
+    const endPage = Math.min(startPage + 4, totalPages);
+    for (let i = startPage; i <= endPage; i++) {
+      const pageButton = document.createElement('li');
+      pageButton.classList.add('pagination__item');
+      if (i === currentPage) {
+        pageButton.classList.add('active');
+      }
+      const pageSpan = document.createElement('span');
+      pageSpan.textContent = i.toString();
+      pageButton.appendChild(pageSpan);
+      paginationList.appendChild(pageButton);
+    }
+
+    const nextButton = document.createElement('li');
+    nextButton.classList.add('pagination__item', 'pagination__item-button');
+    const nextButtonIcon = document.createElement('img');
+    nextButtonIcon.classList.add('pagination__icon-arrow', 'pagination__icon-arrow--right');
+    nextButtonIcon.setAttribute('src', './images/arrow-right.svg');
+    nextButtonIcon.setAttribute('width', '16');
+    nextButtonIcon.setAttribute('height', '16');
+    nextButton.appendChild(nextButtonIcon);
+    paginationList.appendChild(nextButton);
+
+    paginationContainer.appendChild(paginationList);
+
+    paginationList.addEventListener('click', event => {
+      const target = event.target;
+      if (target.tagName === 'SPAN') {
+        const pageIndex = parseInt(target.textContent);
+        if (pageIndex >= 1 && pageIndex <= totalPages) {
+          currentPage = pageIndex;
+          resultDiv.innerHTML = '';
+          FavoritesMovies();
+        }
+      } else if (target === prevButton) {
+        if (currentPage > 1) {
+          currentPage--;
+          resultDiv.innerHTML = '';
+          FavoritesMovies();
+        }
+      } else if (target === nextButton) {
+        if (currentPage < totalPages) {
+          currentPage++;
+          resultDiv.innerHTML = '';
+          FavoritesMovies();
+        }
+      }
+    });
+  }
+}
+
+createPagination();
 
 const searchInput = document.getElementById('Movie-search');
 
@@ -115,123 +189,3 @@ function searchMovies(event) {
 
 // Wywołanie funkcji searchMovies() po kliknięciu przycisku "Szukaj"
 document.getElementById('search-button').addEventListener('click', searchMovies);
-
-// const paginationContainer = document.querySelector(".pagination");
-// const itemsPerPage = 20;
-// let items = [];
-
-// fetch(?)
-//   .then(response => response.json())
-//   .then(data => {
-//     items = data.items;
-
-//     if (items.length === 0) {
-//       console.error("Brak elementów do paginacji.");
-//     }
-
-// dzielenie card na strony
-// const numPages = Math.ceil(items.length / itemsPerPage);
-// przycisk wsteczny
-//     const prevButton = document.createElement("li");
-//     prevButton.className = "pagination__item pagination__item-button";
-//     prevButton.innerHTML = `
-//       <svg class="pagination__icon-arrow pagination__icon-arrow--left" width="16" height="16">
-//         <use href="images/arrows.svg#icon-arrow-left2"></use>
-//       </svg>
-//     `;
-//     paginationContainer.appendChild(prevButton);
-// przycisk przód
-//     const nextButton = document.createElement("li");
-//     nextButton.className = "pagination__item pagination__item-button";
-//     nextButton.innerHTML = `
-//       <svg class="pagination__icon-arrow pagination__icon-arrow--right" width="16" height="16">
-//         <use href="images/arrows.svg#icon-arrow-right2"></use>
-//       </svg>
-//     `;
-//     paginationContainer.appendChild(nextButton);
-
-// ilość stron, przypisanie miejsca odpowiedniej strony
-//     for (let i = 1; i <= numPages; i++) {
-//       const pageButton = document.createElement("li");
-//       pageButton.className = "pagination__item";
-//       pageButton.innerHTML = `<span>${i}</span>`;
-//       paginationContainer.insertBefore(
-//         pageButton,
-//         paginationContainer.lastElementChild
-//       );
-//     }
-
-// wywoływanie odpowiednich stron dla 1 strony
-//     function goToPage(page) {
-//       const startIndex = (page - 1) * itemsPerPage;
-//       const endIndex = startIndex + itemsPerPage;
-
-// to samo dla przycisków, zeby znikały, gdy liczba kard nie jest większa od limitu na jednej stronie
-//       items.forEach((item, index) => {
-//         if (index >= startIndex && index < endIndex) {
-//           item.style.display = "block";
-//         } else {
-//           item.style.display = "none";
-//         }
-//       });
-//     }
-
-//     goToPage(1);
-
-// klikniecie na odpowiednia strone - przekierowanie
-//     const pageButtons = Array.from(document.querySelectorAll(".pagination__item:not(.pagination__item-button)"));
-//     if (pageButtons.length > 0) {
-//       pageButtons.forEach((button, index) => {
-//         button.addEventListener("click", () => {
-//           const currentPage = index + 1;
-//           goToPage(currentPage);
-//         });
-//       });
-//     }
-// klik na przycisk - poprzedni
-//     if (prevButton) {
-//       prevButton.addEventListener("click", () => {
-//         const activePage = document.querySelector(".pagination__item.active");
-//         if (!activePage) {
-//           console.error(error);
-//           return;
-//         }
-//         const currentPage = parseInt(activePage.textContent);
-
-//         if (currentPage > 1) {
-//           const prevPage = activePage.previousElementSibling;
-//           if (!prevPage) {
-//             console.error("error");
-//             return;
-//           }
-//           activePage.classList.remove("active");
-//           prevPage.classList.add("active");
-//           goToPage(currentPage - 1);
-//         }
-//       });
-//     }
-// klik na przycisk - next
-//     if (nextButton) {
-//       nextButton.addEventListener("click", () => {
-//         const activePage = document.querySelector(".pagination__item.active");
-//         if (!activePage) {
-//           console.error("error");
-//           return;
-//         }
-//         const currentPage = parseInt(activePage.textContent);
-
-//         if (currentPage < numPages) {
-//           const nextPage = activePage.nextElementSibling;
-//           if (!nextPage) {
-//             console.error("error");
-//           return;
-//         }
-//         activePage.classList.remove("active");
-//         nextPage.classList.add("active");
-//         goToPage(currentPage + 1);
-//       }
-//     });
-//   })
-//   .catch(error => {
-//     console.error("error");
-//   });
