@@ -11,34 +11,40 @@ function displayWatchedMovies() {
       const movieDiv = document.createElement('div');
       movieDiv.classList.add('movie-container__card');
       movieDiv.addEventListener('click', function () {
-        createModal(movie, year); // Przekazanie danych filmu jako argument do createModal
+        createModal(movie); // Przekazanie danych filmu jako argument do createModal
       });
 
-      const genres = Array.isArray(movie.genre_ids)
-        ? movie.genre_ids.map(genreId => {
-            const genre = genresResponse.genres.find(g => g.id === genreId);
-            return genre ? genre.name : '';
-          })
-        : [];
-      const fullDate = movie.release_date;
-      const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+      const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
+      const genresUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=genres`;
 
-      const fallbackImageURL =
-        'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
-      movieDiv.innerHTML = `
-        <img src="${
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : fallbackImageURL
-        }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
-        <p class="movie-container__movie-description">
-          <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-          <span class="movie-container__genre">${genres.join(', ')} | </span>
-          <span class="movie-container__screening">${year}</span>
-          <span class="movie-container__rating"> |  ${movie.vote_average}</span>
-        </p>
-      `;
-      watchedmoviesDiv.appendChild(movieDiv);
+      fetch(genresUrl)
+        .then(response => response.json())
+        .then(movieResponse => {
+          const genres = movieResponse.genres.map(genre => genre.name).join(', ');
+
+          const fullDate = movie.release_date;
+          const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+
+          const fallbackImageURL =
+            'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
+          movieDiv.innerHTML = `
+            <img src="${
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : fallbackImageURL
+            }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
+            <p class="movie-container__movie-description">
+              <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+              <span class="movie-container__genre">${genres} | </span>
+              <span class="movie-container__screening">${year}</span>
+              <span class="movie-container__rating-display"> |  ${movie.vote_average}</span>
+            </p>
+          `;
+          watchedmoviesDiv.appendChild(movieDiv);
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
     });
   }
 }
@@ -54,34 +60,40 @@ function displayQueuedMovies() {
       const movieDiv = document.createElement('div');
       movieDiv.classList.add('movie-container__card');
       movieDiv.addEventListener('click', function () {
-        createModal(movie, year); // Przekazanie danych filmu jako argument do createModal
+        createModal(movie); // Przekazanie danych filmu jako argument do createModal
       });
 
-      const genres = Array.isArray(movie.genre_ids)
-        ? movie.genre_ids.map(genreId => {
-            const genre = genresResponse.genres.find(g => g.id === genreId);
-            return genre ? genre.name : '';
-          })
-        : [];
-      const fullDate = movie.release_date;
-      const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+      const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
+      const genresUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=genres`;
 
-      const fallbackImageURL =
-        'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
-      movieDiv.innerHTML = `
-        <img src="${
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : fallbackImageURL
-        }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
-        <p class="movie-container__movie-description">
-          <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-          <span class="movie-container__genre">${genres.join(', ')} | </span>
-          <span class="movie-container__screening">${year}</span>
-          <span class="movie-container__rating"> |  ${movie.vote_average}</span>
-        </p>
-      `;
-      queuedmoviesDiv.appendChild(movieDiv);
+      fetch(genresUrl)
+        .then(response => response.json())
+        .then(movieResponse => {
+          const genres = movieResponse.genres.map(genre => genre.name).join(', ');
+
+          const fullDate = movie.release_date;
+          const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
+
+          const fallbackImageURL =
+            'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
+          movieDiv.innerHTML = `
+            <img src="${
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : fallbackImageURL
+            }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
+            <p class="movie-container__movie-description">
+              <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+              <span class="movie-container__genre">${genres} | </span>
+              <span class="movie-container__screening">${year}</span>
+              <span class="movie-container__rating-display"> |  ${movie.vote_average}</span>
+            </p>
+          `;
+          queuedmoviesDiv.appendChild(movieDiv);
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
     });
   }
 }
