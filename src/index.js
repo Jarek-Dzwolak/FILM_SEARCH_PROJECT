@@ -1,6 +1,7 @@
 // import './sass/main.scss';
 import { createModal } from './modal';
-const resultDiv = document.querySelector('.movie-container__favorites');
+const resultDiv = document.querySelector('.movie-container');
+// const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
 let totalPages = 0;
 function FavoritesMovies() {
@@ -51,6 +52,7 @@ function FavoritesMovies() {
     })
     .catch(err => console.error(err));
 }
+
 FavoritesMovies();
 
 function createPagination() {
@@ -133,7 +135,8 @@ function searchMovies(event) {
   const searchQuery = searchInput.value;
   const page = 1; // Numer strony, którą chcesz pobrać
 
-  resultDiv.style.display = 'none';
+  // resultDiv.style.display = 'none';
+  resultDiv.innerHTML = '';
 
   fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${page}`,
