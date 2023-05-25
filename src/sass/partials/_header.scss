@@ -97,6 +97,7 @@
   left: 0;
   width: 0;
   height: 3px;
+
   background-color: transparent;
 }
 
@@ -106,6 +107,12 @@
   background-color: #ff001b;
 }
 
+.header__form {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+}
 .header__form {
   display: flex;
   align-items: center;
@@ -139,6 +146,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.14;
+
 }
 .header__icon-svg {
   fill: #ffffff;
@@ -171,4 +179,5 @@
       }
     }
   }
+
 }
