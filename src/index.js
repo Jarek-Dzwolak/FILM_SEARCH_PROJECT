@@ -1,6 +1,7 @@
 // import './sass/main.scss';
 import { createModal } from './modal';
-const resultDiv = document.querySelector('.movie-container__favorites');
+const resultDiv = document.querySelector('.movie-container');
+// const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
@@ -49,6 +50,7 @@ function FavoritesMovies() {
     })
     .catch(err => console.error(err));
 }
+
 FavoritesMovies();
 
 const searchInput = document.getElementById('Movie-search');
@@ -59,7 +61,8 @@ function searchMovies(event) {
   const searchQuery = searchInput.value;
   const page = 1; // Numer strony, którą chcesz pobrać
 
-  resultDiv.style.display = 'none';
+  // resultDiv.style.display = 'none';
+  resultDiv.innerHTML = '';
 
   fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${page}`,
