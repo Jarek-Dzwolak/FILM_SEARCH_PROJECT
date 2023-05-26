@@ -1,13 +1,16 @@
 .header {
-  background-image: url('../images/320/abstract-background1.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url('../images/320/abstract-background1.jpg');
   background-size: cover;
 
   @include tablet {
-    background-image: url('../images/768/background-1.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/768/background-1.jpg');
   }
 
   @include desktop {
-    background-image: url('../images/1280/abstract-background1.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/1280/abstract-background1.jpg');
   }
 
   &-wrapper {
@@ -113,12 +116,10 @@
       max-width: 336px;
     }
 
-
     @include desktop {
       max-width: 394px;
     }
   }
-
 
   &__logo {
     margin: 0;
@@ -222,14 +223,17 @@
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
   .header {
-    background-image: url('../images/320/abstract-background2.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/320/abstract-background2.jpg');
 
     @include tablet {
-      background-image: url('../images/768/background-2.jpg');
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url('../images/768/background-2.jpg');
     }
 
     @include desktop {
-      background-image: url('../images/1280/abstract-background2.jpg');
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url('../images/1280/abstract-background2.jpg');
     }
   }
 }
