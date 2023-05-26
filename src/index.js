@@ -1,9 +1,11 @@
 // import './sass/main.scss';
 import { createModal } from './modal';
+
 const resultDiv = document.querySelector('.movie-container');
 // const resultDiv = document.querySelector('.movie-container__favorites');
 let currentPage = 1;
 let totalPages = 0;
+
 function FavoritesMovies() {
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
@@ -144,9 +146,6 @@ function searchMovies(event) {
   )
     .then(response => response.json())
     .then(response => {
-      const searchMovieDiv = document.querySelector('.movie-container__search-movies');
-      searchMovieDiv.innerHTML = ''; // Wyczyszczenie wyników poprzedniego wyszukiwania
-
       // Pobierz listę gatunków filmowych
       fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
         .then(genresResponse => genresResponse.json())
@@ -180,7 +179,7 @@ function searchMovies(event) {
               <span class="movie-container__rating"> |  ${movie.vote_average}</span>
               </p>
             `;
-            searchMovieDiv.appendChild(movieDiv);
+            resultDiv.appendChild(movieDiv);
           });
           totalPages = response.total_pages;
           createPagination();
@@ -188,6 +187,7 @@ function searchMovies(event) {
     })
     .catch(err => console.error(err));
 }
+
 function createPagination() {
   const paginationContainer = document.querySelector('.pagination');
   if (paginationContainer) {

@@ -1,6 +1,5 @@
 import { createModal } from './modal';
 
-
 const movieList = document.getElementById('library');
 const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 
@@ -8,7 +7,6 @@ function displayWatchedMovies() {
   const watchedMovies = localStorage.getItem('watchedMovies');
   const parsedWatchedMovies = JSON.parse(watchedMovies);
   if (watchedMovies) {
-
     parsedWatchedMovies.forEach(movie => {
       const movieDiv = document.createElement('div');
       movieDiv.classList.add('movie-container__card');
@@ -43,7 +41,6 @@ function displayWatchedMovies() {
           </p>
           `;
           movieList.appendChild(movieDiv);
-
         })
         .catch(error => {
           console.log('Error:', error);
@@ -51,7 +48,6 @@ function displayWatchedMovies() {
     });
   }
 }
-
 
 function displayQueuedMovies() {
   if (queuedMovies) {
@@ -94,7 +90,6 @@ function displayQueuedMovies() {
           `;
 
           movieList.appendChild(movieDiv);
-
         })
         .catch(error => {
           console.log('Error:', error);
@@ -107,15 +102,11 @@ const watchedButton = document.getElementById('header-Watched');
 const queueButton = document.getElementById('header-Queue');
 
 watchedButton.addEventListener('click', function () {
-
   movieList.innerHTML = '';
-
   displayWatchedMovies();
 });
 
 queueButton.addEventListener('click', function () {
-
   movieList.innerHTML = '';
-
   displayQueuedMovies();
 });
