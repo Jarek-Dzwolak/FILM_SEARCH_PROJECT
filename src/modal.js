@@ -12,7 +12,7 @@ function createModal(movie) {
     vote_average: movie.vote_average,
     vote_count: movie.vote_count,
     popularity: Math.floor(movie.popularity),
-    original_title: movie.original_title,
+    original_name: movie.original_name,
     release_date: movie.release_date,
     overview: movie.overview,
   };
@@ -33,12 +33,14 @@ function createModal(movie) {
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
         movie.title || movie.name
       } Poster" class="modal__image" />
-          <div id="modal-text" class="modal__text">
-            <h3 id="modal-title" class="modal__title"></h3>
+          <div class="modal__text">
+            <h3 class="modal__title">${movie.title || movie.name}</h3>
             <div class="modal__info">
               <p class="modal__info__category">Vote / Votes</p>
               <p class="modal__info__details">
-                <span class="modal__info__details__ranking">${modalData.vote_average}</span>
+                <span class="modal__info__details__ranking">${modalData.vote_average.toFixed(
+                  1,
+                )}</span>
                 <span class="modal__info__category"> / </span>
                 <span>${modalData.vote_count}</span>
               </p>
@@ -50,20 +52,20 @@ function createModal(movie) {
             <div class="modal__info">
               <p class="modal__info__category">Original Title</p>
               <p class="modal__info__details">
-                <span>${modalData.original_title}<span>
+                <span>${modalData.original_name}<span>
               </p>
             </div>
             <div class="modal__info">
               <p class="modal__info__category">Genre</p>
               <p class="modal__info__details">${genres}</p>
             </div>
-            <article class="modal__description">
-              <p id="modal-description__modal">ABOUT</p>
-              <p id="modal-decription">${modalData.overview}</p>
+            <article class="modal__description">ABOUT
+              
+              <p class="modal__description__text">${modalData.overview}</p>
             </article>
             <div class="modal__buttons">
-              <button id="watched-btn" class="button button--modal">ADD TO WATCHED</button>
-              <button id="queue-btn" class="button button--modal">ADD TO QUEUE</button>
+              <button id="watched-btn" >ADD TO WATCHED</button>
+              <button id="queue-btn">ADD TO QUEUE</button>
             </div>
           </div>
         </div>`;

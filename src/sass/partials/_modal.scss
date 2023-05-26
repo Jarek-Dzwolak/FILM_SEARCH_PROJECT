@@ -5,10 +5,7 @@
 .backdrop {
   content: '';
   position: fixed;
-  top: -100%;
-  left: -100%;
-  right: -100%;
-  bottom: -100%;
+  inset: 0;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.25);
   display: flex;
@@ -20,7 +17,7 @@
   display: flex;
   flex-direction: column;
   padding: 48px 20px 40px;
-  max-width: 280px;
+  width: 280px;
   max-height: 80vh;
   align-items: center;
   position: fixed;
@@ -28,6 +25,21 @@
   transform: translateX(-50%);
   background-color: white;
   overflow-y: scroll;
+  gap: 20px;
+
+  @include tablet {
+    width: 704px;
+    padding: 40px 72px 40px 36px;
+    gap: 68px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  @include desktop {
+    width: 806px;
+    padding: 40px 12px;
+    gap: 16px;
+  }
 
   &__close {
     position: absolute;
@@ -35,7 +47,6 @@
     right: 8px;
     width: 30px;
     height: 30px;
-    display: flex;
     background-color: white;
     border: none;
     justify-content: center;
@@ -49,19 +60,31 @@
 
   &__image {
     border-radius: 5px;
-    max-width: 240px;
+
+    @include tablet {
+      width: 264px;
+    }
+
+    @include desktop {
+      width: 375px;
+    }
   }
 
   &__text {
     display: block;
+    width: 100%;
   }
 
   &__title {
     font-size: 20px;
     line-height: 1.17;
-    margin-block: 20px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     position: relative;
+
+    @include desktop {
+      font-size: 30px;
+    }
   }
 
   &__info {
@@ -90,36 +113,81 @@
 
   &__description {
     font-size: 12px;
-    line-height: 20px;
-    margin-block: 20px;
-    &__modal {
-      margin-bottom: 8px;
+    line-height: 1.66;
+    margin-bottom: 20px;
+
+    @include tablet {
+      margin-top: 20px;
+    }
+
+    &__text {
+      margin-top: 6px;
     }
   }
 
   &__buttons {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+
+    @include tablet {
+      gap: 15px;
+    }
+  }
+}
+
+#watched-btn {
+  width: 110px;
+  font-size: 12px;
+  padding: 6px 5px;
+  margin: 0px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #000000;
+
+  &:hover,
+  &:focus {
+    background-color: $orange;
+    color: white;
+    border: none;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
 
-  @media (min-width: 768px) {
-    max-width: 704px;
-    flex-direction: row;
-    align-items: flex-start;
+  @include tablet {
+    width: 125px;
+    padding: 14px 7.2px 12px;
+  }
 
-    &__image {
-      margin-right: 20px;
-    }
+  @include desktop {
+    width: 136px;
+    padding: 14px 10px 12px;
+    margin-left: 8px;
+  }
+}
 
-    &__text {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+#queue-btn {
+  width: 110px;
+  padding: 13px 0;
+  margin: 0px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid #000000;
 
-    &__title {
-      margin-bottom: 0;
-    }
+  &:hover,
+  &:focus {
+    background-color: $orange;
+    color: white;
+    border: none;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  }
+
+  @include tablet {
+    width: 125px;
+    padding: 14px 0 12px;
+  }
+
+  @include desktop {
+    width: 136px;
+    padding: 14px 8px 12px;
   }
 }
