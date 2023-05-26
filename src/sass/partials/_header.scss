@@ -14,10 +14,12 @@
 .header-wrapper {
   max-width: 320px;
   padding: 40px 20px 44px 20px;
+
   @include tablet {
     max-width: 768px;
-    padding: 40px 33px 45px 31 px;
+    padding: 40px 33px 45px 31px;
   }
+
   @include desktop {
     padding: 40px 32px 44px 32px;
     max-width: 1280px;
@@ -28,9 +30,11 @@
   display: flex;
   margin-bottom: 53px;
   max-width: 480px;
+
   @include tablet {
     max-width: 768px;
   }
+
   @include desktop {
     max-width: 1280px;
   }
@@ -46,9 +50,11 @@
   margin: 0;
   padding: 0;
   color: #ffffff;
+
   @include tablet {
     gap: 40px;
   }
+
   @include desktop {
     gap: 39px;
   }
@@ -58,42 +64,59 @@
   list-style: none;
 }
 
-.header__navigate-item--filmoteka {
-  display: none;
-  position: absolute;
-  top: 40px;
-  right: 387px;
-  bottom: 141px;
-  left: 63px;
-
-  @include tablet {
-    display: inline-block;
-  }
-}
-
-.header__navigate-item--filmoteka p {
+.header__navigate-item--filmoteka a {
   color: #ffffff;
   font-weight: 500;
   font-size: 30px;
   line-height: 1.16;
   font-family: Roboto;
+  display: none;
+
+  @include tablet {
+    display: inline;
+  }
+}
+
+.header__icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .header__link {
   color: #ffffff;
   text-decoration: none;
+  position: relative;
 }
 
-.header__link--underline-always {
-  text-decoration: underline;
-  text-decoration-color: #ff001b;
+.header__link::before,
+.header__link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
   height: 3px;
+
+  background-color: transparent;
 }
-px .header__link--underline:hover,
-.header__link--underline:focus {
-  text-decoration: underline;
-  text-decoration-color: #ff001b;
-  height: 3px;
+
+.header__link--active::before,
+.header__link:hover::before {
+  width: 100%;
+  background-color: #ff001b;
+}
+
+.header__form {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+}
+.header__form {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .header__form #Movie-search {
@@ -104,12 +127,14 @@ px .header__link--underline:hover,
   width: 280px;
   border-bottom: 0.5px solid rgba(255, 255, 255, 1);
   display: inline-block;
+  padding-right: 20px;
 
   @include tablet {
     display: flex;
     justify-content: center;
     width: 336px;
   }
+
   @include desktop {
     width: 394px;
   }
@@ -120,29 +145,38 @@ px .header__link--underline:hover,
   opacity: 0.5;
   font-weight: 400;
   font-size: 14px;
-  line-height: 1, 14;
-  margin-bottom: 4px;
-}
+  line-height: 1.14;
 
+}
 .header__icon-svg {
   fill: #ffffff;
 }
+
 .header__search-icon {
   fill: #ffffff;
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  transform: translateY(-10px);
 }
+#search-button {
+  background: transparent;
+  border: none;
+  outline: none;
 
-@media screen and (min-device-pixel-ratio: 2),
-  screen and (min-resolution: 192dpi),
-  screen and (min-resolution: 2dppx) {
-  .header {
-    background-image: url('../images/320/abstract-background2.jpg');
+  @media screen and (min-device-pixel-ratio: 2),
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+    .header {
+      background-image: url('../images/320/abstract-background2.jpg');
 
-    @include tablet {
-      background-image: url('../images/768/background-2.jpg');
-    }
+      @include tablet {
+        background-image: url('../images/768/background-2.jpg');
+      }
 
-    @include desktop {
-      background-image: url('../images/1280/abstract-background2.jpg');
+      @include desktop {
+        background-image: url('../images/1280/abstract-background2.jpg');
+      }
     }
   }
 
