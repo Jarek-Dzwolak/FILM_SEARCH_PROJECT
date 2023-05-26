@@ -1,0 +1,72 @@
+.library {
+  background-image: url('../images/320/library-background-mobile.jpg');
+  background-size: cover;
+
+  @include tablet {
+    background-image: url('../images/768/library-background-tablet.jpg');
+  }
+
+  @include desktop {
+    background-image: url('../images/1280/library-background-desktop.jpg');
+  }
+
+  &__wrapper {
+    max-width: 320px;
+    padding: 40px 20px 44px 20px;
+
+    @include tablet {
+      max-width: 768px;
+      padding: 40px 33px 45px 31px;
+    }
+
+    @include desktop {
+      padding: 40px 32px 44px 32px;
+      max-width: 1280px;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__icon-text {
+    display: none;
+    @include tablet {
+      display: inline;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    @include desktop {
+      display: inline;
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+
+  &__navigate a:hover,
+  &__navigate a:focus {
+    color: #ff001b;
+  }
+
+  &__buttons-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: Transparent;
+    padding: 10px 30px;
+    &:hover,
+    &:focus {
+      background: #ff6b01;
+      box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+      border: #ff6b01;
+    }
+  }
+}
