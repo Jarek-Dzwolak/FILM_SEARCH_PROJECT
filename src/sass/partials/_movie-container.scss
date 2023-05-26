@@ -3,52 +3,56 @@
   margin: 0 auto;
   padding: 20px;
   padding-bottom: 40px;
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   @include tablet {
     max-width: 768px;
     padding: 60px 32px;
+    gap: 32px;
   }
 
   @include desktop {
     max-width: 1280px;
     padding-bottom: 44px;
+    gap: 16px;
+    margin-bottom: 16px;
   }
-  &__search-movies {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  // &__search-movies {
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   justify-content: center;
+  //   gap: 20px;
 
-    @include tablet {
-      gap: 32px;
-    }
+  //   @include tablet {
+  //     gap: 32px;
+  //   }
 
-    @include desktop {
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-  }
-  &__favorites {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  //   @include desktop {
+  //     gap: 16px;
+  //     margin-bottom: 16px;
+  //   }
+  // }
+  // &__favorites {
 
-    @include tablet {
-      gap: 32px;
-    }
+  //   @include tablet {
 
-    @include desktop {
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-  }
+  //   }
+
+  //   @include desktop {
+
+  //   }
+  // }
 
   &__card {
     width: 280px;
     margin: 0;
+    &:hover {
+      scale: 1.03;
+    }
 
     @include tablet {
       width: 336px;
@@ -102,5 +106,8 @@
 
   &__rating {
     display: none;
+  }
+  &__rating-display {
+    display: block;
   }
 }
