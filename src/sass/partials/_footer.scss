@@ -20,9 +20,11 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
+  
 
     @include tablet {
       margin-bottom: 0px;
+      
     }
   }
 
@@ -64,6 +66,25 @@
     stroke: currentColor;
     margin: 10px;
   }
+
+}
+
+.icon {
+
+
+display: flex;
+flex-direction: column;
+
+  @include tablet {
+  
+  flex-direction: row;
+  }
+
+    @include desktop {
+ 
+  flex-direction: row;
+  }
+
 }
 
 //modal
