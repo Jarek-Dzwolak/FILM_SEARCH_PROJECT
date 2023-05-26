@@ -113,10 +113,12 @@
       max-width: 336px;
     }
 
+
     @include desktop {
       max-width: 394px;
     }
   }
+
 
   &__logo {
     margin: 0;

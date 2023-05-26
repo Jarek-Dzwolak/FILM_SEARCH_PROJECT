@@ -1,10 +1,11 @@
 .button {
+  margin: 0;
   border-radius: 5px;
   border: 1px solid white;
   text-align: center;
   font-size: 12px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 1.33;
   padding: 14px 9.19px 12px;
   width: 125px;
   &:hover,
