@@ -118,7 +118,7 @@
     &:focus {
       background: #ff6b01;
       box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-      border: #ff6b01;
+      border: 1px solid #ff6b01;
       transition-property: background-color;
       transition-duration: $transitionDurationDeafault;
       transition-timing-function: $tarnsitionTimingDefault;
