@@ -26,6 +26,7 @@
   background-color: white;
   overflow-y: scroll;
   gap: 20px;
+  scrollbar-width: none;
 
   @include tablet {
     width: 704px;
@@ -100,7 +101,6 @@
       flex: 1 1 0px;
     }
     &__details {
-      text-transform: uppercase;
       &__ranking {
         color: white;
         background-color: $orange;

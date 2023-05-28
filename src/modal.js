@@ -13,7 +13,7 @@ function createModal(movie) {
     vote_count: movie.vote_count,
     popularity: Math.floor(movie.popularity),
     original_name: movie.original_name,
-    release_date: movie.release_date,
+    release_date: movie.release_date || movie.first_air_date,
     overview: movie.overview,
   };
 
