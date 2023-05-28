@@ -72,7 +72,7 @@ function createModal(movie) {
             <div class="modal__info">
               <p class="modal__info__category">Original Title</p>
               <p class="modal__info__details">
-                <span>${modalData.original_name}<span>
+                <span>${movie.title || movie.name}<span>
               </p>
             </div>
             <div class="modal__info">
