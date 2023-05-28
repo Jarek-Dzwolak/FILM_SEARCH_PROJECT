@@ -131,25 +131,49 @@ function createPagination() {
 createPagination();
 
 const searchInput = document.getElementById('Movie-search');
+let failMessage;
 
 function searchMovies(event) {
   event.preventDefault();
   const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
   const searchQuery = searchInput.value;
   const page = 1; // Numer strony, którą chcesz pobrać
-
+  const header = document.querySelector('.header-wrapper');
   // resultDiv.style.display = 'none';
   resultDiv.innerHTML = '';
+  fallbackImageURL = 'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
 
   fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&page=${page}`,
   )
-    .then(response => response.json())
     .then(response => {
-      // Pobierz listę gatunków filmowych
+      if (!response.ok) {
+        throw new Error('Search request failed');
+      }
+      return response.json();
+    })
+    .then(response => {
+      if (response.results.length === 0) {
+        if (failMessage) {
+          failMessage.remove();
+        }
+        failMessage = document.createElement('h3');
+        failMessage.id = 'fail';
+        failMessage.style.color = 'red';
+        failMessage.style.fontSize = '14px';
+        failMessage.style.lineHeight = '1.3';
+        failMessage.style.textAlign = 'center';
+        failMessage.innerHTML = 'No movies found. Enter the correct movie name.';
+        header.appendChild(failMessage);
+        return;
+      }
       fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
         .then(genresResponse => genresResponse.json())
         .then(genresResponse => {
+          if (failMessage) {
+            failMessage.remove();
+            failMessage = null;
+          }
           response.results.forEach(movie => {
             const movieDiv = document.createElement('div');
             movieDiv.classList.add('movie-container__card');
@@ -164,28 +188,36 @@ function searchMovies(event) {
             const fullDate = movie.release_date;
             const year = fullDate ? fullDate.slice(0, 4) : 'Brak danych';
 
-            fallbackImageURL =
-              'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
             movieDiv.innerHTML = `
-            <img src="${
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : fallbackImageURL
-            }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
-              <p class="movie-container__movie-description">
-              <h2 class="movie-container__title">${movie.title || movie.name}</h2>
-              <span class="movie-container__genre">${genres.join(', ')} | </span>
-              <span class="movie-container__screening">${year}</span>
-              <span class="movie-container__rating"> |  ${movie.vote_average}</span>
-              </p>
-            `;
+        <img src="${
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            : fallbackImageURL
+        }" alt="${movie.title || movie.name} Poster" class="movie-container__image">
+          <p class="movie-container__movie-description">
+          <h2 class="movie-container__title">${movie.title || movie.name}</h2>
+          <span class="movie-container__genre">${genres.join(', ')} | </span>
+          <span class="movie-container__screening">${year}</span>
+          <span class="movie-container__rating"> |  ${movie.vote_average}</span>
+          </p>
+        `;
             resultDiv.appendChild(movieDiv);
           });
           totalPages = response.total_pages;
           createPagination();
         });
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      const failMessage = document.createElement('h3');
+      failMessage.id = 'fail';
+      failMessage.style.color = 'red';
+      failMessage.style.fontSize = '14px';
+      failMessage.style.lineHeight = '1.3';
+      failMessage.style.textAlign = 'center';
+      failMessage.innerHTML = 'An error occurred while fetching movie data.';
+      header.appendChild(failMessage);
+    });
 }
 
 function createPagination() {
