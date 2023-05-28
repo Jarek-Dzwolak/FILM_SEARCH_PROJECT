@@ -25,7 +25,6 @@ function displayWatchedMovies() {
           const fullDate = movie.release_date;
           const year = fullDate ? fullDate.slice(0, 4) : movie.first_air_date.slice(0, 4);
 
-          const votes = movie.votes;
           movieDiv.innerHTML = `
 
           <div class= movie-container__image-box>
@@ -38,8 +37,8 @@ function displayWatchedMovies() {
           <p class="movie-container__movie-description">
           <h2 class="movie-container__title">${movie.title || movie.name}</h2>
           <span class="movie-container__genre">${genres} | </span>
-          <span class="movie-container__screening">${year} |</span>
-          <span class="movie-container__rating"> |  ${movie.vote_average.toFixed(1)}</span>
+          <span class="movie-container__screening">${year}</span>
+          <span class="movie-container__rating-display">${movie.vote_average.toFixed(1)}</span>
           </p>
           `;
           movieList.appendChild(movieDiv);
