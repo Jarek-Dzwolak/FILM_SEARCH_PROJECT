@@ -1,8 +1,28 @@
 export { createModal, closeModal };
 
+let main; // Zmienna globalna
+let backDrop; // Zmienna globalna
+
+function closeModal() {
+  main.removeChild(backDrop);
+  document.removeEventListener('keydown', closeModalOnEsc);
+}
+
+function closeModalOnEsc(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}
+
+function closeModalOnClick(event) {
+  if (event.target === backDrop) {
+    closeModal();
+  }
+}
+
 function createModal(movie) {
-  const main = document.querySelector('.movie-container');
-  const backDrop = document.createElement('div');
+  main = document.querySelector('.movie-container'); // Przypisanie wartości do zmiennej globalnej
+  backDrop = document.createElement('div'); // Przypisanie wartości do zmiennej globalnej
   backDrop.classList.add('backdrop');
 
   const modalData = {
@@ -72,10 +92,13 @@ function createModal(movie) {
 
       main.appendChild(backDrop);
 
-      const closeModal = document.getElementById('close-modal-btn');
-      closeModal.addEventListener('click', function () {
-        main.removeChild(backDrop);
-      });
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      closeModalBtn.addEventListener('click', closeModal);
+
+      // const closeModal = document.getElementById('close-modal-btn');
+      // closeModal.addEventListener('click', function () {
+      //   main.removeChild(backDrop);
+      // });
 
       const watchedBtn = document.getElementById('watched-btn');
       watchedBtn.addEventListener('click', function () {
@@ -100,6 +123,9 @@ function createModal(movie) {
           localStorage.setItem('queuedMovies', JSON.stringify(queuedMovies));
         }
       });
+
+      document.addEventListener('keydown', closeModalOnEsc);
+      backDrop.addEventListener('click', closeModalOnClick);
     })
     .catch(error => {
       console.log('Error:', error);
