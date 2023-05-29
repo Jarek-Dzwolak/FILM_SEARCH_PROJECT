@@ -86,6 +86,24 @@ function createPagination() {
 
     const startPage = Math.max(currentPage - 2, 1);
     const endPage = Math.min(startPage + 4, totalPages);
+    const isFirstPageVisible = startPage > 1;
+    const isLastPageVisible = endPage < totalPages;
+
+    if (window.innerWidth > 768 && isFirstPageVisible) {
+      const firstPage = document.createElement('li');
+      firstPage.classList.add('pagination__item');
+      const firstPageSpan = document.createElement('span');
+      firstPageSpan.textContent = '1';
+      firstPage.appendChild(firstPageSpan);
+      paginationList.appendChild(firstPage);
+      if (startPage > 2) {
+        const dots = document.createElement('li');
+        dots.classList.add('pagination__item', 'pagination__item-dots');
+        dots.textContent = '...';
+        paginationList.appendChild(dots);
+      }
+    }
+
     for (let i = startPage; i <= endPage; i++) {
       const pageButton = document.createElement('li');
       pageButton.classList.add('pagination__item');
@@ -96,6 +114,21 @@ function createPagination() {
       pageSpan.textContent = i.toString();
       pageButton.appendChild(pageSpan);
       paginationList.appendChild(pageButton);
+    }
+
+    if (window.innerWidth > 768 && isLastPageVisible) {
+      if (endPage < totalPages - 1) {
+        const dots = document.createElement('li');
+        dots.classList.add('pagination__item', 'pagination__item-dots');
+        dots.textContent = '...';
+        paginationList.appendChild(dots);
+      }
+      const lastPage = document.createElement('li');
+      lastPage.classList.add('pagination__item');
+      const lastPageSpan = document.createElement('span');
+      lastPageSpan.textContent = totalPages.toString();
+      lastPage.appendChild(lastPageSpan);
+      paginationList.appendChild(lastPage);
     }
 
     const nextButton = document.createElement('li');
