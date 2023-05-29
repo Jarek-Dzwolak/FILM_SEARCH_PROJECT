@@ -8,6 +8,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 40px;
+
+    @include tablet {
+      margin-bottom: 60px;
+    }
   }
 
   &__item {
