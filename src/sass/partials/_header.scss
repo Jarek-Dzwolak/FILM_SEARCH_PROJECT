@@ -2,10 +2,12 @@
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url('../images/320/abstract-background1.jpg');
   background-size: cover;
+  height: 230px;
 
   @include tablet {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../images/768/background-1.jpg');
+    height: 216px;
   }
 
   @include desktop {
@@ -30,16 +32,18 @@
 
   &-container {
     display: flex;
-    margin-bottom: 53px;
+    margin-bottom: 56px;
     max-width: 480px;
     align-items: center;
 
     @include tablet {
       max-width: 768px;
+      margin-bottom: 48px;
     }
 
     @include desktop {
       max-width: 1280px;
+      margin-bottom: 49px;
     }
   }
 
@@ -211,12 +215,6 @@
   border: none;
   outline: none;
   position: relative;
-  // @include tablet {
-  //   margin-left: -185px;
-  // }
-  // @include desktop {
-  //   margin-left: -410px;
-  // }
 }
 
 @media screen and (min-device-pixel-ratio: 2),
