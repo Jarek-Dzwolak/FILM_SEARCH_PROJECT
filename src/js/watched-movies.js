@@ -70,19 +70,9 @@ function displayQueuedMovies() {
             .filter(genre => genre !== '')
         : [];
 
-      // const genres = Array.isArray(movie.genre_ids)
-      //   ? movie.genre_ids
-      //       .map(genreId => {
-      //         const genre = movieGenres.find(g => g.id === genreId);
-      //         return genre ? genre.name : '';
-      //       })
-      //       .filter(genre => genre !== '')
-      //   : [];
-
       const fullDate = movie.release_date;
       const year = fullDate ? fullDate.slice(0, 4) : movie.first_air_date.slice(0, 4);
-      // const fallbackImageURL =
-      //   'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
+
       movieDiv.innerHTML = `
            <div class= movie-container__image-box>
               <img src="${
