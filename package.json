@@ -4,8 +4,8 @@
   "description": "",
   "homepage": "https://jarek-dzwolak.github.io/FILM_SEARCH_PROJECT/",
   "scripts": {
-    "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /FILM_SEARCH_PROJECT/"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url /FILM_SEARCH_PROJECT/"
   },
   "repository": {
     "type": "git",
