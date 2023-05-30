@@ -1,27 +1,27 @@
 export const movieGenres = [
   {
     id: 28,
-    name: 'Action',
+    name: 'Actions',
   },
   {
     id: 12,
-    name: 'Abenteuer',
+    name: 'Adventure',
   },
   {
     id: 16,
-    name: 'Animation',
+    name: 'Aimation',
   },
   {
     id: 35,
-    name: 'Komödie',
+    name: 'Comedy',
   },
   {
     id: 80,
-    name: 'Krimi',
+    name: 'Thriller',
   },
   {
     id: 99,
-    name: 'Dokumentarfilm',
+    name: 'Documentary',
   },
   {
     id: 18,
@@ -29,7 +29,7 @@ export const movieGenres = [
   },
   {
     id: 10751,
-    name: 'Familie',
+    name: 'Family',
   },
   {
     id: 14,
@@ -37,7 +37,7 @@ export const movieGenres = [
   },
   {
     id: 36,
-    name: 'Historie',
+    name: 'History',
   },
   {
     id: 27,
@@ -45,15 +45,15 @@ export const movieGenres = [
   },
   {
     id: 10402,
-    name: 'Musik',
+    name: 'Music',
   },
   {
     id: 9648,
-    name: 'Mystery',
+    name: 'Mysteries',
   },
   {
     id: 10749,
-    name: 'Liebesfilm',
+    name: 'Love movie',
   },
   {
     id: 878,
@@ -69,7 +69,7 @@ export const movieGenres = [
   },
   {
     id: 10752,
-    name: 'Kriegsfilm',
+    name: 'War Movie',
   },
   {
     id: 37,
