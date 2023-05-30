@@ -1,0 +1,35 @@
+$loader-dot-size: 25px;
+$loader-dot-margin: 35px;
+
+.loader-dot {
+  margin: 0;
+  width: $loader-dot-size;
+  height: $loader-dot-size;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: $loader-dot-margin;
+  animation: 1s load-spinner infinite;
+  animation-timing-function: ease-in-out;
+  background: white;
+
+  &--one {
+    animation-delay: 0.4s;
+  }
+
+  &--two {
+    animation-delay: 0.6s;
+  }
+
+  &--three {
+    animation-delay: 0.8s;
+  }
+}
+
+@keyframes load-spinner {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
