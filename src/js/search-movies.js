@@ -1,5 +1,5 @@
 export { searchMovies };
-import { createPagination } from './pagination';
+// import { createPagination } from './pagination';
 import { FavoritesMovies } from './index';
 import { movieGenres } from './genres';
 import { createModal } from './modal';
@@ -13,6 +13,7 @@ let failMessage;
 async function searchMovies(event) {
   event.preventDefault();
   const searchQuery = searchInput.value;
+  isSearching = true;
   const page = 1;
   const header = document.querySelector('.header-wrapper');
   resultDiv.innerHTML = '';
@@ -85,9 +86,6 @@ async function searchMovies(event) {
 
       resultDiv.appendChild(movieDiv);
     });
-
-    totalPages = data.total_pages;
-    createPagination();
   } catch (err) {
     console.error(err);
   }

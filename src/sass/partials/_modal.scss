@@ -26,7 +26,6 @@
   background-color: white;
   overflow-y: scroll;
   gap: 20px;
-  scrollbar-width: none;
 
   @include tablet {
     width: 720px;
