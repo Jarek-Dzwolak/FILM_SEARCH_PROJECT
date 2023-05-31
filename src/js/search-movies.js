@@ -13,7 +13,7 @@ let failMessage;
 async function searchMovies(event) {
   event.preventDefault();
   const searchQuery = searchInput.value;
-  isSearching = true;
+
   const page = 1;
   const header = document.querySelector('.header-wrapper');
   resultDiv.innerHTML = '';
