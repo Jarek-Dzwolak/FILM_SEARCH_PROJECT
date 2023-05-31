@@ -53,12 +53,15 @@ function createModal(movie, movieGenres) {
         .filter(genre => genre !== '')
     : [];
 
+  const ModalPoster = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : `https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg`;
   // Tworzenie modala
 
   backDrop.innerHTML = ` 
         <div id="modal" class="modal">
           <button id="close-modal-btn" type="button" class="modal__close">&times;</button>
-          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+          <img src="${ModalPoster}" alt="${
     movie.title || movie.name
   } Poster" class="modal__image" />
           <div class="modal__text">

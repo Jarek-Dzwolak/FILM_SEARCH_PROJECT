@@ -33,7 +33,11 @@ function displayWatchedMovies(page) {
         : [];
 
       const fullDate = movie.release_date;
-      const year = fullDate.length > 0 ? fullDate.slice(0, 4) : '';
+      const year = fullDate
+        ? fullDate.slice(0, 4)
+        : movie.first_air_date
+        ? movie.first_air_date.slice(0, 4)
+        : '';
 
       movieDiv.innerHTML = `
         <div class="movie-container__image-box">
@@ -88,7 +92,11 @@ function displayQueuedMovies(page) {
         : [];
 
       const fullDate = movie.release_date;
-      const year = fullDate.length > 0 ? fullDate.slice(0, 4) : '';
+      const year = fullDate
+        ? fullDate.slice(0, 4)
+        : movie.first_air_date
+        ? movie.first_air_date.slice(0, 4)
+        : '';
 
       movieDiv.innerHTML = `
            <div class= movie-container__image-box>
@@ -161,4 +169,3 @@ queueButton.addEventListener('click', function () {
   movieList.innerHTML = '';
   displayQueuedMovies(queuedMoviesPage);
 });
-
