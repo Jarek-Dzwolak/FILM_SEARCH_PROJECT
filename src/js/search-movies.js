@@ -17,7 +17,7 @@ async function searchMovies(event) {
   const page = 1;
   const header = document.querySelector('.header-wrapper');
   resultDiv.innerHTML = '';
-  fallbackImageURL = 'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
+  let fallbackImageURL = 'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
 
   try {
     const response = await fetch(
