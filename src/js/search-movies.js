@@ -1,5 +1,5 @@
 export { searchMovies };
-// import { createPagination } from './pagination';
+import { createPagination } from './index';
 import { FavoritesMovies } from './index';
 import { movieGenres } from './genres';
 import { createModal } from './modal';
@@ -10,11 +10,11 @@ const apiKey = 'f2bec2f8de04498ca2fd18780a529a31';
 const searchInput = document.getElementById('Movie-search');
 let failMessage;
 
-async function searchMovies(event) {
+async function searchMovies(event, currentPage) {
   event.preventDefault();
+  console.log(currentPage);
   const searchQuery = searchInput.value;
-
-  const page = 1;
+  const page = currentPage;
   const header = document.querySelector('.header-wrapper');
   resultDiv.innerHTML = '';
   let fallbackImageURL = 'https://upload.wikimedia.org/wikipedia/commons/5/55/Brak_obrazka.svg';
@@ -88,6 +88,7 @@ async function searchMovies(event) {
         </p>
       `;
 
+      createPagination();
       resultDiv.appendChild(movieDiv);
     });
   } catch (err) {
