@@ -11,6 +11,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include desktop {
+    overflow: hidden;
+  }
 }
 
 .modal {
@@ -26,7 +30,6 @@
   background-color: white;
   overflow-y: scroll;
   gap: 20px;
-  scrollbar-width: none;
 
   @include tablet {
     width: 720px;
@@ -40,6 +43,8 @@
     width: 806px;
     padding: 40px 12px;
     gap: 16px;
+    overflow-y: hidden;
+    scrollbar-width: none;
   }
 
   &__close {
