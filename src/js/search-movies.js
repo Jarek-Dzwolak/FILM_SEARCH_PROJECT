@@ -67,7 +67,7 @@ async function searchMovies(event) {
         : [];
 
       const fullDate = movie.release_date;
-      const year = fullDate ? fullDate.slice(0, 4) : movie.first_air_date.slice(0, 4);
+      const year = fullDate.length > 0 ? fullDate.slice(0, 4) : '';
 
       movieDiv.innerHTML = `
         <div class="movie-container__image-box">

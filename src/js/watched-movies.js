@@ -33,7 +33,7 @@ function displayWatchedMovies(page) {
         : [];
 
       const fullDate = movie.release_date;
-      const year = fullDate ? fullDate.slice(0, 4) : movie.first_air_date.slice(0, 4);
+      const year = fullDate.length > 0 ? fullDate.slice(0, 4) : '';
 
       movieDiv.innerHTML = `
         <div class="movie-container__image-box">
@@ -88,7 +88,7 @@ function displayQueuedMovies(page) {
         : [];
 
       const fullDate = movie.release_date;
-      const year = fullDate ? fullDate.slice(0, 4) : movie.first_air_date.slice(0, 4);
+      const year = fullDate.length > 0 ? fullDate.slice(0, 4) : '';
 
       movieDiv.innerHTML = `
            <div class= movie-container__image-box>
@@ -162,33 +162,3 @@ queueButton.addEventListener('click', function () {
   displayQueuedMovies(queuedMoviesPage);
 });
 
-// window.addEventListener('DOMContentLoaded', function () {
-//   const currentSection = getCurrentSection();
-//   toggleLoadMoreButtons(currentSection);
-// });
-
-// function getCurrentSection() {
-//   return watchedButton.classList.contains('library__button--active') ? 'watched' : 'queued';
-// }
-
-// function toggleLoadMoreButtons(currentSection) {
-//   if (currentSection === 'watched') {
-//     const loadMoreWatchedButton = document.getElementById('load-more-watched');
-//     const loadMoreQueuedButton = document.getElementById('load-more-queued');
-//     loadMoreWatchedButton.classList.remove('hidden');
-//     loadMoreQueuedButton.classList.add('hidden');
-//   } else {
-//     const loadMoreWatchedButton = document.getElementById('load-more-watched');
-//     const loadMoreQueuedButton = document.getElementById('load-more-queued');
-//     loadMoreWatchedButton.classList.add('hidden');
-//     loadMoreQueuedButton.classList.remove('hidden');
-//   }
-// }
-
-// watchedButton.addEventListener('click', function () {
-//   toggleLoadMoreButtons('watched');
-// });
-
-// queueButton.addEventListener('click', function () {
-//   toggleLoadMoreButtons('queued');
-// });
